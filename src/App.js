@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import StaffList from './components/StaffListComponent'
 import { Navbar, NavbarBrand } from "reactstrap";
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { STAFFS } from "./shared/staffs";
 class App extends Component {
   constructor(props){

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import StaffList from './components/StaffListComponent';
+import StaffList from './components/StaffListComponent'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { STAFFS } from "./shared/staffs";
 class App extends Component {
   constructor(props){
     super(props);
-    this.state={}
+    this.state={staffs:STAFFS}
   }
   render(){return (
       <div className="App">
@@ -14,7 +15,7 @@ class App extends Component {
             DANH SACH NHAN VIEN
           </h1>
         </header>
-        <StaffList />
+        <StaffList staffs={this.state.staffs}/>
       </div>
   )} 
 }

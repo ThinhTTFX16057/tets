@@ -5,9 +5,11 @@ class StaffList extends Component{
         super(props);
         this.state={}
     }
-    
     render(){
-        return(<div></div>)
+        return(
+        <div>
+
+        </div>)
     }
 }
 export default StaffList

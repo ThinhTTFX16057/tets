@@ -10,8 +10,8 @@ class StaffList extends Component{
     render(){
         const displaystaff=this.props.staffs.map((x)=>{return(
             
-                <Card key={x.id} className="col-md-4 col-sm-6 col-xs-12">
-                    <button>
+                <Card key={x.id} className="col-md-4 col-sm-6 col-xs-12 m-2">
+                    <button className="btn btn-info btn-block">
                         {x.name}
                     </button>
                 </Card>
@@ -19,8 +19,9 @@ class StaffList extends Component{
       
         )})
         return(
-        <div>
-            {displaystaff}
+        <div className="container">
+                {displaystaff}
+
         </div>
     )}
 }

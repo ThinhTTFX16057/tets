@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import StaffList from './components/StaffListComponent'
+import { Navbar, NavbarBrand } from "reactstrap";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { STAFFS } from "./shared/staffs";
@@ -10,12 +11,13 @@ class App extends Component {
   }
   render(){return (
       <div className="App">
-        <header className="App-header">
-          <h1>
-            DANH SACH NHAN VIEN
-          </h1>
-        </header>
+        <Navbar dark color="primary">
+          <div className="container">
+            <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
+          </div>
+        </Navbar>
         <StaffList staffs={this.state.staffs}/>
+        <p>Bấm vào tên nhân viên để xem thông tin</p>
       </div>
   )} 
 }

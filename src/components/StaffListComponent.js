@@ -14,23 +14,48 @@ class StaffList extends Component{
 
     
     render(){
-       
+
        
         const displayStaff=this.props.stafflist.map((staff)=>{
-            return(
-            <Card key={staff.id} onClick={()=>this.handleClick(staff)} className="col-md-4 col-sm-6 col-xs-12 my-2">
-                <button className="btn btn-info btn-block">
-                    {staff.name}
-                </button>
-            </Card>
-            );
+            if(this.props.numberofcolumn==2){
+                return(
+                <Card key={staff.id} onClick={()=>this.handleClick(staff)} className="col-md-6 col-sm-6 col-xs-12 my-2">
+                    <button className="btn btn-info btn-block">
+                        <h5>{staff.name}</h5>
+                    </button>
+                </Card>
+                )}
+            else if(this.props.numberofcolumn==3){
+                return(
+                <Card key={staff.id} onClick={()=>this.handleClick(staff)} className="col-md-4 col-sm-4 col-xs-12 my-2">
+                    <button className="btn btn-info btn-block">
+                        <h5>{staff.name}</h5>
+                    </button>
+                </Card>
+                )}
+            else if(this.props.numberofcolumn==6){
+                return(
+                <Card key={staff.id} onClick={()=>this.handleClick(staff)} className="col-md-2 col-sm-2 col-xs-12 my-2">
+                    <button className="btn btn-info btn-block">
+                        <h5>{staff.name}</h5>
+                    </button>
+                </Card>
+                )}
+            else {
+                return(
+                <Card key={staff.id} onClick={()=>this.handleClick(staff)} className="col-md-4 col-sm-6 col-xs-12 my-2">
+                    <button className="btn btn-info btn-block">
+                        <h5>{staff.name}</h5>
+                    </button>
+                </Card>
+                )}
         });
-
+    
         
 
         return(
             <div>
-                <div class="container">
+                <div class="container-fluid" style={{backgroundColor: "rgba(220,220,220,0.8)"}}>
                     <div className="row">
                         {displayStaff}
                     </div>

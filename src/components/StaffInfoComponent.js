@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card,CardImg} from 'reactstrap';
+import {Card,CardImg,CardBody} from 'reactstrap';
 import { Navbar, NavbarBrand } from "reactstrap";
 import dateFormat from 'dateformat';
 
@@ -11,12 +11,12 @@ class StaffInfo extends Component{
 
     displayInfo(staff){
         return(    
-        <div>
-            <Card key={staff.id} className="col-md-3 col-sm-4 col-12 boximage">
+        <Card key={staff.id}>
+            <CardBody  className="col-md-3 col-sm-4 col-12 boximage">
                 <CardImg src={staff.image} />
                 <h4>{staff.name}</h4>
-            </Card>
-            <Card key={staff.id} style={{height: "230px"}} className="col-md-4 col-sm-6 col-12">       
+            </CardBody>
+            <CardBody className="col-md-4 col-sm-6 col-12 boxinfo">       
                 
                 <h3>Họ và tên: {staff.name}</h3>
                 
@@ -49,8 +49,8 @@ class StaffInfo extends Component{
                     <input type="text" disabled value={staff.overTime}></input>
                 </div>
                 
-            </Card>
-        </div>
+            </CardBody>
+        </Card>
         );
     };
 
@@ -58,7 +58,7 @@ class StaffInfo extends Component{
         if (this.props.selectedStaff!=null){return(
             <div>
                 <Navbar style={{margin: "0"}} color="info">
-                    <NavbarBrand href="/">Thông tin nhân viên</NavbarBrand>
+                    <NavbarBrand href="/"><strong>Thông tin nhân viên</strong></NavbarBrand>
                 </Navbar>
                 {this.displayInfo(this.props.selectedStaff)}
             </div>
@@ -66,9 +66,9 @@ class StaffInfo extends Component{
         else{return(
         <div>
             <Navbar color="info">
-                <NavbarBrand href="/">Thông tin nhân viên</NavbarBrand>
+                <NavbarBrand href="/"><strong>Thông tin nhân viên</strong></NavbarBrand>
             </Navbar>
-            <p>Bấm vào tên nhân viên để xem thông tin</p>
+            <p><em>**Bấm vào tên nhân viên để xem thông tin</em></p>
         </div>)}
     }
     

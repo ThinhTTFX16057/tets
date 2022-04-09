@@ -29,13 +29,13 @@ class StaffList extends Component{
         
 
         return(
-            <div className="container">
-                <div className="row">
-                    {displayStaff}</div>
-                <div className="row">
-                
-                    <StaffInfo selectedStaff={this.state.selectedStaff} />
+            <div>
+                <div class="container">
+                    <div className="row">
+                        {displayStaff}
+                    </div>
                 </div>
+                <StaffInfo selectedStaff={this.state.selectedStaff} />
             </div>
         );
     }

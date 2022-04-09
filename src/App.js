@@ -12,8 +12,11 @@ class App extends Component {
   }
   render(){return (
       <div className="App">
-        <Navbar dark color="primary">
-            <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
+        <Navbar style={{margin: "0",backgroundColor:"rgb(32,154,194)"}}>
+            <NavbarBrand style={{color:"white"}} href="/"><strong>ỨNG DỤNG QUẢN LÝ NHÂN SỰ v1.0</strong></NavbarBrand>
+        </Navbar>
+        <Navbar style={{margin: "0",backgroundColor:"rgb(28,43,53)"}}>
+            <NavbarBrand style={{color:"rgb(193,193,193)"}} href="/"><strong>Danh sách nhân viên</strong></NavbarBrand>
         </Navbar>
         <StaffList stafflist={this.state.staffs}/>
       </div>

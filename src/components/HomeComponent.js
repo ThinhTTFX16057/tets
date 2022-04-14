@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
 import { Navbar, NavbarBrand } from "reactstrap";
-import './App.css';
-import StaffList from './components/StaffListComponent';
-import { STAFFS } from "./shared/staffs";
-
 
 class Home extends Component {
   constructor(props){
     super(props);
-    this.state={staffs:STAFFS,columns:null}
+    this.state={numberofcolumns:null}
   }
 
   showcolumn(x){
-      this.setState({columns:x})
+      this.setState({numberofcolumns:x})
   }
 
   render(){return (
@@ -42,7 +38,6 @@ class Home extends Component {
             </ul>
           </div>
         </div>
-        <StaffList stafflist={this.state.staffs} numberofcolumn={this.state.columns}/>
       </div>
   )} 
 }

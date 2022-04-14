@@ -16,7 +16,7 @@ class StaffList extends Component{
     render(){
 
        
-        const displayStaff=this.props.stafflist.map((staff)=>{
+        const displayStaff=this.props.staffs.map((staff)=>{
             if(this.props.numberofcolumn==2){
                 return(
                 <Card key={staff.id} onClick={()=>this.handleClick(staff)} className="col-md-6 col-sm-6 col-xs-12 my-2">

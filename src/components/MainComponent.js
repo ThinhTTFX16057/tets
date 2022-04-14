@@ -46,7 +46,7 @@ class Main extends Component{
             <Route exact path="/salary" component={
                     ()=><Salary staffs={this.state.staffs}/>
                   }/>
-              <Redirect to="/home"/>
+            <Redirect to="/home"/>
             </Switch>
             <Footer/>
         </div>

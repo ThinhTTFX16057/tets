@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Card,CardImg,CardBody} from 'reactstrap';
-import { Navbar, NavbarBrand } from "reactstrap";
+import {Card,CardImg,CardBody, Navbar, NavbarBrand, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link} from "react-router-dom";
 import dateFormat from 'dateformat';
 
 class StaffInfo extends Component{
@@ -10,13 +10,13 @@ class StaffInfo extends Component{
     }
 
     displayInfo(staff){
-        return(    
+        return(
         <Card key={staff.id}>
             <CardBody  className="col-md-3 col-sm-4 col-12 boximage">
                 <CardImg src={staff.image} />
                 <h4>{staff.name}</h4>
             </CardBody>
-            <CardBody className="col-md-4 col-sm-6 col-12 boxinfo">       
+            <CardBody className="col-md-9 col-sm-8 col-12 boxinfo">       
                 
                 <h3>Họ và tên: {staff.name}</h3>
                 
@@ -55,23 +55,31 @@ class StaffInfo extends Component{
     };
 
     render(){
-        if (this.props.selectedStaff!=null){return(
-            <div>
-                <Navbar style={{margin: "0"}} color="info">
-                    <NavbarBrand href="/"><strong>Thông tin nhân viên</strong></NavbarBrand>
-                </Navbar>
-                {this.displayInfo(this.props.selectedStaff)}
+        if (this.props.staff!=null){return(
+            <div className="container">
+                <div className='row'>
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to='/staff'>Nhân viên</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{this.props.staff.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className='col-12'>
+                        <Navbar style={{margin: "0"}} color="info">
+                            <NavbarBrand href="/"><strong>Thông tin nhân viên</strong></NavbarBrand>
+                        </Navbar>
+                        <h3>{this.props.staff.name}</h3>
+                        <hr/>
+                    </div>
+                </div>
+                <div className="row">
+                    {this.displayInfo(this.props.staff)}
+                </div>
             </div>
         )}
-        else{return(
-        <div>
-            <Navbar color="info">
-                <NavbarBrand href="/"><strong>Thông tin nhân viên</strong></NavbarBrand>
-            </Navbar>
-            <p><em>**Bấm vào tên nhân viên để xem thông tin</em></p>
-        </div>)}
+        else {return(
+            <div>
+            </div>
+        )}
     }
-    
-
 }
 export default StaffInfo

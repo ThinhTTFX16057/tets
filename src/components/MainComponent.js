@@ -5,6 +5,7 @@ import Footer from './FooterComponent';
 import Salary from './SalaryComponent';
 import Department from './DepartmentComponent';
 import StaffList from './StaffListComponent';
+import StaffInfo from './StaffInfoComponent';
 import { STAFFS } from '../shared/staffs';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
@@ -18,6 +19,15 @@ class Main extends Component{
     
     
     render(){
+        const StaffWithId=({match})=>{
+            return(
+            <StaffInfo
+            staff={this.state.staffs.filter((staff)=>staff.id===parseInt(match.params.staffId,10))[0]}
+            />
+                
+            );
+
+        }
 
         return (
         <div>
@@ -29,6 +39,7 @@ class Main extends Component{
             <Route exact path="/staff" component={
                   ()=><StaffList staffs={this.state.staffs}/>
                 }/>
+            <Route path="/staff/:staffId" component={StaffWithId}/>
             <Route exact path="/department" component={
                   ()=><Department staffs={this.state.staffs}/>
                 }/>

@@ -10,23 +10,23 @@ class Salary extends Component{
     render(){
         const renderSalary=this.props.staffs.map((x)=>{
             return(
-                <Card kex={x.id} className='col-md-4 col-sm-6 col-12 m-1'>
+                <div key={x.id} className='col-md-4 col-sm-6 col-12 my-2'>
                     <CardBody>
-                        <CardTitle>{x.name}</CardTitle>
+                        <CardTitle><h4>{x.name}</h4></CardTitle>
                         <CardText>Mã nhân viên: {x.id}</CardText>
                         <CardText>Hệ số lương: {x.salaryScale}</CardText>
                         <CardText>Số giờ làm thêm: {x.overTime}</CardText>
                         <CardText>Lương: {parseInt(x.salaryScale
                         *3000000+x.overTime*200000/8)}</CardText>
                     </CardBody>
-                </Card>
+                </div>
             );
         })   
     return(
-        <div className="container">
-            <div className='row'>
+        <div className="container-fluid">
+            <div>
                 <Breadcrumb>
-                    <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
                     <BreadcrumbItem><Link to='/department' active>Phòng ban</Link></BreadcrumbItem>
                 </Breadcrumb>
             </div>

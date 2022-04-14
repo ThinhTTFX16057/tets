@@ -11,52 +11,51 @@ class StaffInfo extends Component{
 
     displayInfo(staff){
         return(
-        <Card key={staff.id}>
-            <CardBody  className="col-md-3 col-sm-4 col-12 boximage">
+        <div key={staff.id} className="row">
+            <CardBody  className="col-md-3 col-sm-4 col-12">
                 <CardImg src={staff.image} />
-                <h4>{staff.name}</h4>
             </CardBody>
-            <CardBody className="col-md-9 col-sm-8 col-12 boxinfo">       
+            <CardBody className="col-md-9 col-sm-8 col-12">       
                 
                 <h3>Họ và tên: {staff.name}</h3>
                 
-                <div className="clearfix align-middle">
-                    <strong>Ngày sinh:</strong>
+                <div className="my-3">
+                    <div className="title"><strong>Ngày sinh:</strong></div>
                     <input type="text" disabled value={dateFormat(staff.doB,"dd/mm/yyyy")}></input>
                 </div>
             
             
-                <div className="clearfix align-middle">
-                    <strong>Ngày vào công ty: </strong>
+                <div className="my-3">
+                    <div className="title"><strong>Ngày vào công ty:</strong></div>
                     <input type="text" disabled value={dateFormat(staff.startDate,"dd/mm/yyyy")}></input>
                 </div>
             
             
-                <div className="clearfix align-middle">
-                    <strong>Phòng ban:</strong>
+                <div className="my-3">
+                    <div className="title"><strong>Phòng ban:</strong></div>
                     <input type="text" disabled value={staff.department.name}></input>
                 </div>
             
             
-                <div className="clearfix align-middle">
-                    <strong>Số ngày nghỉ còn lại: </strong>
+                <div className="my-3">
+                    <div className="title"><strong>Số ngày nghỉ còn lại:</strong></div>
                     <input type="text" disabled value={staff.annualLeave}></input>
                 </div>
             
             
-                <div className="clearfix align-middle">
-                    <strong>Số ngày đã làm thêm: </strong>
+                <div className="my-3">
+                    <div className="title"><strong>Số giờ đã làm thêm:</strong></div>
                     <input type="text" disabled value={staff.overTime}></input>
                 </div>
                 
             </CardBody>
-        </Card>
+        </div>
         );
     };
 
     render(){
         if (this.props.staff!=null){return(
-            <div className="container">
+            <div className="body">
                 <div className='row'>
                     <Breadcrumb>
                         <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
@@ -67,13 +66,13 @@ class StaffInfo extends Component{
                         <Navbar style={{margin: "0"}} color="info">
                             <NavbarBrand href="/"><strong>Thông tin nhân viên</strong></NavbarBrand>
                         </Navbar>
-                        <h3>{this.props.staff.name}</h3>
-                        <hr/>
+                        
+                        
                     </div>
                 </div>
-                <div className="row">
+                
                     {this.displayInfo(this.props.staff)}
-                </div>
+                
             </div>
         )}
         else {return(

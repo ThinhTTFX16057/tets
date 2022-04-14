@@ -12,19 +12,19 @@ class Department extends Component{
     render(){
         const renderDepartment=this.props.departments.map((x)=>{
             return(
-                <Card kex={x.id} className='col-md-4 col-sm-6 col-12 m-1'>
+                <Card kex={x.id} className='col-md-4 col-sm-6 col-12 my-2'>
                     <CardBody>
-                        <CardTitle>{x.name}</CardTitle>
+                        <CardTitle><h4>{x.name}</h4></CardTitle>
                         <CardText>Số lượng nhân viên: {x.numberOfStaff}</CardText>
                     </CardBody>
                 </Card>
             );
         })   
     return(
-        <div className="container">
+        <div className="container-fluid">
             <div className='row'>
                 <Breadcrumb>
-                    <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
                     <BreadcrumbItem><Link to='/department' active>Phòng ban</Link></BreadcrumbItem>
                 </Breadcrumb>
             </div>

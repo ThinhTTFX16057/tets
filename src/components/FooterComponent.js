@@ -3,17 +3,17 @@ import React from "react";
 function Footer(props){
     return(
         <div className="footer">
-            <div className="container">
-                    <div className="col-4 offset-1 col-sm-2">
+            <div className="container-fluid">
+                    <div className="col-md-4 col-sm-6 col-12 ">
                         <h4>Liên kết</h4>
-                        <ul className="list-unstyled">
-                            <li><a href="/home">Home</a></li>
+                        <ul className="list-unstyled ">
+                            <li><a href="/home">Trang chủ</a></li>
                             <li><a href="/staff">Nhân vien</a></li>
                             <li><a href="/department">Phòng ban</a></li>
                             <li><a href="/salary">Bảng lương</a></li>
                         </ul>
                     </div>
-                    <div className="col-7 col-sm-5">
+                    <div className="col-md-4 col-sm-6 col-12">
                         <h4>Địa chỉ</h4>
                         <address>
                           <i className="fa fa-address-card fa-lg"></i>: 123 Hai Bà Trưng, Phường 1, Quận 1, TP.HCM<br />
@@ -23,7 +23,7 @@ function Footer(props){
                           thinhttfx16057@funix.edu.vn</a>
                         </address>
                     </div>
-                    <div className="col-12 col-sm-4 align-self-center">
+                    <div className="col-md-4 col-sm-6 col-12 align-self-center">
                         <div className="row justify-content-center">    
                             <h4>Đăng nhập</h4>
                         </div>

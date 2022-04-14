@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Nav, Navbar, NavbarToggler, Collapse, NavItem } from 'reactstrap';
+import { Nav, Navbar, Collapse, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
@@ -20,20 +20,19 @@ class Header extends Component {
 
     render() {
         return(
-            <div className="header">
-                <div className="container-fluid clearfix">
-                    <div className="float-left">
-                        <h4 style={{fontSize:"4vw"}}>Staff Management App v2.0</h4>
+            <div className="header container-fluid">
+                <div className="clearfix">
+                    <div className="row floatleft d-inline-block">
+                        <h4 style={{fontSize:"25px"}}>Staff Management App v2.0</h4>
                     </div>
-                    <div className="float-right">
-                        <h4 style={{fontSize:"2vw"}} className="fa fa-sign-in"> Đăng nhập</h4>
+                    <div className="row floatright d-inline-block mt-3">
+                        <h4 style={{fontSize:"15px"}} className="fa fa-sign-in"> Đăng nhập</h4>
                     </div>
                 </div>
                 <Navbar dark expand="sm">
-                    <div className="container">
-                        <NavbarToggler onClick={this.toggleNav} />
-                        <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav navbar >
+                    <button aria-label="Toggle navigation" type="button" className="navbar-toggler" onClick={this.toggleNav}><span class="navbar-toggler-icon"></span>Menu</button>
+                    <Collapse isOpen={this.state.isNavOpen} navbar>
+                        <Nav navbar >
                             <NavItem>
                                 <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Trang chủ</NavLink>
                             </NavItem>
@@ -46,11 +45,9 @@ class Header extends Component {
                             <NavItem>
                                 <NavLink className="nav-link" to='/salary'><span className="fa fa-money fa-lg"></span> Bảng lương</NavLink>
                             </NavItem>
-                            </Nav>
-                        </Collapse>
-                    </div>
-                </Navbar>
-                
+                        </Nav>
+                    </Collapse>
+                </Navbar>    
             </div>
         );
     }

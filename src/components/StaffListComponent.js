@@ -12,37 +12,32 @@ class StaffList extends Component{
     render(){
         const displayStaff=this.props.staffs.map((x)=>{
             return(
-            <Link to={`/staff/${x.id}`}>
+            
             <Card key={x.id} className="col-md-2 col-sm-4 col-xs-6 my-2">
-                <CardImg src={x.image} alt={x.name}/>
-                <CardTitle><h5>{x.name}</h5></CardTitle>
+                <Link to={`/staff/${x.id}`}>
+                <CardImg className="my-2" src={x.image} alt={x.name}/>
+                <CardTitle className="my-2"><h5>{x.name}</h5></CardTitle>
+                </Link>
             </Card>
-            </Link>
+            
             )
         });
     
         
 
         return(
-            <div>
-                <div className="App">
-                    <div className="container-fluid header">
-                        <div className="float-left">
-                            <strong>Danh sách nhân viên</strong>
-                        </div> 
-                    </div>
-                </div>
+            <div className="container-fluid">
                 <div className='row'>
                 <Breadcrumb>
-                    <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
                     <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
                 </Breadcrumb>
                 <div className='col-12'>
-                    <h3>Nhân viên</h3>
+                    <h3>Danh sách nhân viên</h3>
                     <hr/>
                 </div>
             </div>
-                <div class="container-fluid" style={{backgroundColor: "rgba(220,220,220,0.8)"}}>
+                <div class="container-fluid">
                     <div className="row">
                         {displayStaff}
                     </div>

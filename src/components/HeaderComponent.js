@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem } from 'reactstrap';
+import { Nav, Navbar, NavbarToggler, Collapse, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
@@ -20,33 +20,37 @@ class Header extends Component {
 
     render() {
         return(
-            <div>
-                <Navbar dark expand="md">
+            <div className="header">
+                <div className="container-fluid clearfix">
+                    <div className="float-left">
+                        <h4 style={{fontSize:"4vw"}}>Staff Management App v2.0</h4>
+                    </div>
+                    <div className="float-right">
+                        <h4 style={{fontSize:"2vw"}} className="fa fa-sign-in"> Đăng nhập</h4>
+                    </div>
+                </div>
+                <Navbar dark expand="sm">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/"><img src='assets/images/logo.png' height="30" width="41" alt='Ristorante Con Fusion' /></NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav navbar>
+                            <Nav navbar >
                             <NavItem>
-                                <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
+                                <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Trang chủ</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to='/staff'><span className="fa fa-info fa-lg"></span> Nhân viên</NavLink>
+                                <NavLink className="nav-link" to='/staff'><span className="fa fa-users fa-lg"></span> Nhân viên</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link"  to='/department'><span className="fa fa-list fa-lg"></span> Phòng ban</NavLink>
+                                <NavLink className="nav-link"  to='/department'><span className="fa fa-address-card-o fa-lg"></span> Phòng ban</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to='/salary'><span className="fa fa-address-card fa-lg"></span> Bảng lương</NavLink>
+                                <NavLink className="nav-link" to='/salary'><span className="fa fa-money fa-lg"></span> Bảng lương</NavLink>
                             </NavItem>
                             </Nav>
                         </Collapse>
                     </div>
                 </Navbar>
-                <div className="container">
-                    <h3>Ứng dụng quản lý nhân sự v2.0</h3>
-                    <p>...</p>
-                </div>
+                
             </div>
         );
     }

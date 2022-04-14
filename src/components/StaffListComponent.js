@@ -10,12 +10,12 @@ class StaffList extends Component{
 
     
     render(){
-        const displayStaff=this.props.staffs.map((staff)=>{
+        const displayStaff=this.props.staffs.map((x)=>{
             return(
-            <Link to={`/staff/${staff.id}`}>
-            <Card key={staff.id} className="col-md-2 col-sm-4 col-xs-6 my-2">
-                <CardImg src={staff.image} alt={staff.name}/>
-                <CardTitle><h5>{staff.name}</h5></CardTitle>
+            <Link to={`/staff/${x.id}`}>
+            <Card key={x.id} className="col-md-2 col-sm-4 col-xs-6 my-2">
+                <CardImg src={x.image} alt={x.name}/>
+                <CardTitle><h5>{x.name}</h5></CardTitle>
             </Card>
             </Link>
             )

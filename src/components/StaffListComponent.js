@@ -2,16 +2,20 @@ import React, {Component} from "react";
 import {Card} from 'reactstrap';
 import StaffInfo from './StaffInfoComponent';
 
-
 class StaffList extends Component{
     constructor(props){
         super(props);
-        this.state = {selectedStaff:null}
+        this.state = {
+            selectedStaff:null,
+            numberofcolumns:null
+        }
     }
     handleClick(x){
         this.setState({selectedStaff:x})
     }
-
+    showcolumn(x){
+        this.setState({numberofcolumns:x})
+    }
     
     render(){
 
@@ -55,12 +59,36 @@ class StaffList extends Component{
 
         return(
             <div>
+                <div className="App">
+                    <div className="container-fluid header">
+                        <div className="float-left">
+                            <strong>Danh sách nhân viên</strong>
+                        </div> 
+                        <div className="dropdown float-right">
+                            <button className="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">{"Hiển thị "}
+                            <span className="caret"></span></button>
+                                <ul className="dropdown-menu list-unstyled">
+                                <li> 
+                                    <button className="view btn btn-basic btn-md btn-block" onClick={()=>this.showcolumn(2)} >2 cột</button>
+                                </li>
+                                <li> 
+                                    <button className="view btn btn-basic btn-md btn-block" onClick={()=>this.showcolumn(3)} >3 cột</button>
+                                </li>
+                                <li>
+                                    <button className="view btn btn-basic btn-md btn-block" onClick={()=>this.showcolumn(6)} >6 cột</button>
+                                </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="container-fluid" style={{backgroundColor: "rgba(220,220,220,0.8)"}}>
                     <div className="row">
                         {displayStaff}
                     </div>
                 </div>
-                <StaffInfo selectedStaff={this.state.selectedStaff} />
+                <div className="container-fluid">
+                    <StaffInfo selectedStaff={this.state.selectedStaff} />
+                </div>
             </div>
         );
     }

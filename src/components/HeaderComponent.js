@@ -43,6 +43,10 @@ class Header extends Component {
                         </Collapse>
                     </div>
                 </Navbar>
+                <div className="container">
+                    <h3>Ứng dụng quản lý nhân sự v2.0</h3>
+                    <p>...</p>
+                </div>
             </div>
         );
     }

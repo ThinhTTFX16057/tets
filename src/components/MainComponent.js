@@ -26,9 +26,7 @@ class Main extends Component{
             <StaffInfo
             staff={this.state.staffs.filter((staff)=>staff.id===parseInt(match.params.staffId,10))[0]}
             />
-                
             );
-
         }
 
         return (

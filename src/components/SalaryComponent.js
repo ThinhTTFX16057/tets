@@ -1,12 +1,14 @@
 import React, {Component} from "react";
-import {Card, CardBody,CardText, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {CardBody,CardText, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
+
 
 class Salary extends Component{
     constructor(props){
         super(props);
         this.state={}
     }
+    
     render(){
         const renderSalary=this.props.staffs.map((x)=>{
             return(

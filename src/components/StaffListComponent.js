@@ -8,7 +8,6 @@ class StaffList extends Component{
         this.state = {}
     }
 
-    
     render(){
         const displayStaff=this.props.staffs.map((x)=>{
             return(
@@ -32,14 +31,19 @@ class StaffList extends Component{
                     <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
                     <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
                 </Breadcrumb>
-                <div className='col-12'>
-                    <h3>Danh sách nhân viên</h3>
-                    <hr/>
+                <div className='container-fluid'>
+                    <div className="floatleft"><h3>Danh sách nhân viên</h3></div>
+                    <div className="floatright">
+                    <input id="search" type="text" placeholder="họ tên nhân viên"></input>
+                    <button><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
+                    </div>
+                    
                 </div>
             </div>
                 <div class="container-fluid">
                     <div className="row">
                         {displayStaff}
+
                     </div>
                 </div>
             </div>

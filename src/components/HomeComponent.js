@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
+import StaffList from './StaffListComponent';
 
-class Home extends Component {
-  constructor(props){
-    super(props);
-    this.state={}
-  }
-  render(){
+function Home(props){
     return (
-      <div>Đây là trang home</div>
+      <div>
+        <StaffList staffs={props.staffs}/>
+      </div>
     );
   } 
-}
+
 export default Home;

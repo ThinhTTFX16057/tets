@@ -48,20 +48,27 @@ function RenderInfo({staff}){return(
 
 function StaffInfo(props){
     if (props.staff!=null){return(
-        <div className="body">
+        <div className="container-fluid">
             <div className='row'>
                 <Breadcrumb>
                     <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
                     <BreadcrumbItem><Link to='/staff'>Nhân viên</Link></BreadcrumbItem>
                     <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
                 </Breadcrumb>
-                <div className='col-12'>
-                    <Navbar style={{margin: "0"}} color="info">
-                        <NavbarBrand href="/"><strong>Thông tin nhân viên</strong></NavbarBrand>
-                    </Navbar>
+                <div id="menubar" className='container-fluid'>
+                    <div className="floatleft"><h3>Danh sách phòng ban</h3>
+                    </div>
+                    <div className="floatright">
+                        <input id="search" type="text" placeholder="mã nhân viên"></input>
+                        <button><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
+                    </div>
                 </div>
             </div>
-            <RenderInfo staff={props.staff}/>
+            <div class="container-fluid">
+                <div className="row">
+                    <RenderInfo staff={props.staff}/>
+                </div>
+            </div>
         </div>
         )}
     else {return(<div></div>)}

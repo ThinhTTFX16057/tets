@@ -19,11 +19,17 @@ function Department(props){return(
         <div className='row'>
             <Breadcrumb>
                 <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
-                <BreadcrumbItem><Link to='/department' active>Phòng ban</Link></BreadcrumbItem>
+                <BreadcrumbItem active>Phòng ban</BreadcrumbItem>
             </Breadcrumb>
+            <div id="menubar" className='container-fluid'>
+                <div className="floatleft"><h3>Danh sách phòng ban</h3>
+                </div>
+            </div>
         </div>
-        <div className="row">
-            <RenderDepartment departments={props.departments}/>
+        <div class="container-fluid">
+            <div className="row">
+                <RenderDepartment departments={props.departments}/>
+            </div>
         </div>
     </div>
 );}   

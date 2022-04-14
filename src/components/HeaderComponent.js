@@ -22,17 +22,18 @@ class Header extends Component {
         return(
             <div className="header container-fluid">
                 <div className="clearfix">
-                    <div className="row floatleft d-inline-block">
+                    <img width="30" height="30" src="assets/images/logo.png" alt="applogo"></img>
+                    <div className="row floatleft d-inline-block">    
                         <h4 style={{fontSize:"25px"}}>Staff Management App v2.0</h4>
                     </div>
                     <div className="row floatright d-inline-block mt-3">
                         <h4 style={{fontSize:"15px"}} className="fa fa-sign-in"> Đăng nhập</h4>
                     </div>
                 </div>
-                <Navbar dark expand="sm">
+                <Navbar dark expand="lg">
                     <button aria-label="Toggle navigation" type="button" className="navbar-toggler" onClick={this.toggleNav}><span class="navbar-toggler-icon"></span>Menu</button>
-                    <Collapse isOpen={this.state.isNavOpen} navbar>
-                        <Nav navbar >
+                    <Collapse isOpen={this.state.isNavOpen} style={{display:"flex"}}>
+                        <Nav style={{display:"inline-flex"}}>
                             <NavItem>
                                 <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Trang chủ</NavLink>
                             </NavItem>

@@ -1,25 +1,36 @@
 /*CSS header*/
-.header {background-color: rgb(179, 229, 230);}
+.header {background-color: rgb(11, 49, 146);color:white}
+.header img{float:left}
 .floatleft{float:left}
 .floatright{float:right}
-.navbar-toggler{ background-color:rgb(0, 0, 0);
-}
+.navbar-toggler{ background-color:#000000;color: white !important;}
+.navbar-collapse{flex-basis:unset}
 .navbar{padding:0;
-    margin:0;
-    background-color: rgb(0, 0, 0);
-    color:white}
-.nav-item{padding-left:15px;}
-.nav-link{text-align:left}
+    margin:0 -10px;
+    background-color: rgb(255, 255, 255);
+    color:black}
+.navbar-dark{color:black}
+.nav-item{padding-left:25px;font-size:15px}
+.nav-link{text-align:left;color:black}
+.breadcrumb{background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(11,49,146,1));margin: -10px;padding:20px 0 10px 15px;}
+.breadcrumb-item.active{color:white; font-size:small}
+.breadcrumb-item a{color:white;text-decoration: none; font-size:small;font-weight:bold}
+#menubar{margin-top:15px}
 /*End CSS header*/
 
 /*CSS footer*/
-.footer {background-color: rgb(179, 229, 230);}
+.footer {background-color: rgb(11, 49, 146);color:white;
+    margin-top:10px;
+    padding-top:20px}
+.footer h4{font-weight:800}
+#social-link{justify-content: center;
+    display: flex;}
+.footer li{padding:0 5px;}
+.footer a{color:white;text-decoration: none;}
 /*End CSS footer*/
 
 /*CSS StaffListComponent*/
-a {text-decoration: none;
-    color:black;
-    text-align: center;}
+
 .title{width:120px;
-display:inline-block}
+    display:inline-block}
 /*End CSS StaffListComponent*/

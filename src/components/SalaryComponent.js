@@ -21,14 +21,24 @@ function RenderSalary({staffs}){return(
 
 function Salary(props){return(
     <div className="container-fluid">
-        <div>
+        <div className='row'>
             <Breadcrumb>
                 <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
-                <BreadcrumbItem><Link to='/department' active>Phòng ban</Link></BreadcrumbItem>
+                <BreadcrumbItem active>Bảng lương</BreadcrumbItem>
             </Breadcrumb>
+            <div id="menubar" className='container-fluid'>
+                <div className="floatleft"><h3>Bảng lương nhân viên</h3>
+                </div>
+                <div className="floatright">
+                <input id="search" type="text" placeholder="mã nhân viên"></input>
+                <button><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
+                </div>
+            </div>
         </div>
-        <div className="row">
-            <RenderSalary staffs={props.staffs}/>
+        <div class="container-fluid">
+            <div className="row">
+                <RenderSalary staffs={props.staffs}/>
+            </div>
         </div>
     </div>
 );}   

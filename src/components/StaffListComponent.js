@@ -19,19 +19,19 @@ function RenderStaff({staffs}){return(
 function StaffList(props){return(
     <div className="container-fluid">
         <div className='row'>
-        <Breadcrumb>
-            <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
-            <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
-        </Breadcrumb>
-        <div className='container-fluid'>
-            <div className="floatleft"><h3>Danh sách nhân viên</h3>
-            </div>
-            <div className="floatright">
-            <input id="search" type="text" placeholder="mã nhân viên"></input>
-            <button><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
+            <Breadcrumb>
+                <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
+                <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
+            </Breadcrumb>
+            <div id="menubar" className='container-fluid'>
+                <div className="floatleft"><h3>Danh sách nhân viên</h3>
+                </div>
+                <div className="floatright">
+                <input id="search" type="text" placeholder="mã nhân viên"></input>
+                <button><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
+                </div>
             </div>
         </div>
-    </div>
         <div class="container-fluid">
             <div className="row">
                 <RenderStaff staffs={props.staffs}/>

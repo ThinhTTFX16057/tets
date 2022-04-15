@@ -3,34 +3,38 @@
 .header img{float:left}
 .floatleft{float:left}
 .floatright{float:right}
-.navbar-toggler{ background-color:#000000;color: white !important;}
+.navbar-toggler{ background-color:#000000;color: white !important;display:none}
 .navbar-collapse{flex-basis:unset}
-.navbar{padding:0;
-    margin:0 -10px;
-    background-color: rgb(255, 255, 255);
-    color:black}
+.navbar{padding:0;margin:0 -10px;background-color: rgb(255, 255, 255);color:black}
 .navbar-dark{color:black}
 .nav-item{padding-left:25px;font-size:15px}
 .nav-link{text-align:left;color:black}
-.breadcrumb{background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(11,49,146,1));margin: -10px;padding:20px 0 10px 15px;}
-.breadcrumb-item.active{color:white; font-size:small}
-.breadcrumb-item a{color:white;text-decoration: none; font-size:small;font-weight:bold}
-#menubar{margin-top:15px}
 /*End CSS header*/
 
 /*CSS footer*/
-.footer {background-color: rgb(11, 49, 146);color:white;
-    margin-top:10px;
-    padding-top:20px}
+.footer {background-color: rgb(11, 49, 146);color:white;margin-top:10px;padding-top:20px}
 .footer h4{font-weight:800}
-#social-link{justify-content: center;
-    display: flex;}
+#social-link{justify-content: center;display: flex;}
 .footer li{padding:0 5px;}
 .footer a{color:white;text-decoration: none;}
 /*End CSS footer*/
 
-/*CSS StaffListComponent*/
+/*CSS HomeComponent*/
+.chart{margin:20px;font-size: 3vw;}
+.charttitle{margin-top:70px;font-size: 3vw;font-weight:bold}
+/*End CSS HomeComponent*/
 
-.title{width:120px;
-    display:inline-block}
+/*CSS StaffListComponent*/
+.breadcrumb{background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(11,49,146,1));margin: -10px;padding:20px 0 10px 15px;}
+.breadcrumb-item.active{color:white; font-size:small}
+.breadcrumb-item a{color:white;text-decoration: none; font-size:small;font-weight:bold}
+#menubar{margin-top:15px;border-bottom:1px solid rgb(185, 184, 184)}
+#search{border-radius:3px;border:1px solid black;padding:2.5px 0}
+#menubar button:hover{background-color: black;color:white}
+.title{width:120px;display:inline-block}
+.card{margin:10px 0;border:1px solid rgb(185, 184, 184);background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(209,237,252,1))}
+.card-img{border-radius:50%;max-width: 150px;display: block;margin-left: auto;margin-right: auto;}
+.card-title{text-align: center;font-weight:800;font-size:large}
+.card-text{text-align: center;font-size:small}
+.card a{text-decoration: none; color:black}
 /*End CSS StaffListComponent*/

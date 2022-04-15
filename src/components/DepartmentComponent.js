@@ -7,7 +7,7 @@ function RenderDepartment({departments}){return(
         return(
             <Card kex={x.id} className='col-md-4 col-sm-6 col-12 my-2'>
                 <CardBody>
-                    <CardTitle><h4>{x.name}</h4></CardTitle>
+                    <CardTitle>{x.name}</CardTitle>
                     <CardText>Số lượng nhân viên: {x.numberOfStaff}</CardText>
                 </CardBody>
             </Card>
@@ -22,9 +22,10 @@ function Department(props){return(
                 <BreadcrumbItem active>Phòng ban</BreadcrumbItem>
             </Breadcrumb>
             <div id="menubar" className='container-fluid'>
-                <div className="floatleft"><h3>Danh sách phòng ban</h3>
+                <div className="floatleft"><h3><i class="fa fa-id-card-o" aria-hidden="true"></i> Danh sách phòng ban</h3>
                 </div>
             </div>
+            
         </div>
         <div class="container-fluid">
             <div className="row">

@@ -1,14 +1,17 @@
 import React from "react";
-import {Card, CardImg, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Card, CardImg, CardTitle,CardBody,CardText, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 
 function RenderStaff({staffs}){return(
     staffs.map((x)=>{return(
-        <Card key={x.id} className="col-md-2 col-sm-4 col-xs-6 my-2">
+        <Card key={x.id} className="col-md-2 col-sm-4 col-xs-6">
             <Link to={`/staff/${x.id}`}>
-            <CardImg className="my-2" src={x.image} alt={x.name}/>
-            <CardTitle className="my-2"><h5>{x.name}</h5></CardTitle>
+            <CardImg className="col-md-12 col-xs-2 my-3" src={x.image} alt={x.name}/>
+            <CardBody className="col-md-12 colxs-10">
+                <CardTitle>{x.name}</CardTitle>
+                <CardText><p>Phòng ban: {x.department.name}</p></CardText>
+            </CardBody>
             </Link>
         </Card>
         );
@@ -24,11 +27,11 @@ function StaffList(props){return(
                 <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
             </Breadcrumb>
             <div id="menubar" className='container-fluid'>
-                <div className="floatleft"><h3>Danh sách nhân viên</h3>
+                <div className="floatleft"><h3><i class="fa fa-address-book-o" aria-hidden="true"></i> Danh sách nhân viên</h3>
                 </div>
                 <div className="floatright">
-                <input id="search" type="text" placeholder="mã nhân viên"></input>
-                <button><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
+                <input id="search" type="text" placeholder=" mã nhân viên"></input>
+                <button className="btn btn-default btn-sm "><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
                 </div>
             </div>
         </div>

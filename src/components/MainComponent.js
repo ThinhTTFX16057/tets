@@ -28,7 +28,13 @@ class Main extends Component{
             />
             );
         }
-
+        const StaffWithDepartment=({match})=>{
+            return(
+            <StaffInfo
+            staff={this.state.staffs.filter((staff)=>staff.department.name===match.params.staffDepartment)[0]}
+            />
+            );
+        }
         return (
         <div>
             <Header/>
@@ -43,6 +49,7 @@ class Main extends Component{
             <Route exact path="/department" component={
                   ()=><Department departments={this.state.departments}/>
                 }/>
+            <Route path="/staff/:staffDepartment" component={StaffWithDepartment}/>
             <Route exact path="/salary" component={
                     ()=><Salary staffs={this.state.staffs}/>
                   }/>

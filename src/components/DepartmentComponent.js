@@ -6,10 +6,12 @@ function RenderDepartment({departments}){return(
     departments.map((x)=>{
         return(
             <Card kex={x.id} className='col-md-4 col-sm-6 col-12 my-2'>
+                <Link to={`/staff/${x.name}`}>
                 <CardBody>
                     <CardTitle>{x.name}</CardTitle>
                     <CardText>Số lượng nhân viên: {x.numberOfStaff}</CardText>
                 </CardBody>
+                </Link>
             </Card>
         );
     })

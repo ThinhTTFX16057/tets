@@ -22,12 +22,12 @@ function RenderStaff({staff}){
     
         
 const StaffList=(props)=>{
-    const [statesDepartment, changeState] = useState("");
+    const [statesId, changeState] = useState(true);
     const [name,changeName] = useState("");
     const displaystaff=
             props.staffs
             .sort((a,b)=>
-                statesDepartment==="department"? a.department.name.toLowerCase() - b.department.name.toLowerCase():a.id-b.id
+                statesId ? a.id - b.id : b.id - a.id
             )
             .filter((staff)=>{
                 if (name===""){return (staff)}
@@ -56,12 +56,9 @@ const StaffList=(props)=>{
                 </div>
 
                 <div className="floatright sort"><i class="fa fa-sort fa-lg" aria-hidden="true"></i>
-                    <select onChange={()=>{
-                        if (statesDepartment!=="department"){return changeState("salary")}
-                        else if (statesDepartment==="salary"){return changeState("id")}
-                    }}>
-                        <option >Mã nhân viên</option>
-                        <option >Phòng ban</option>
+                    <select onChange={()=>{changeState(!statesId)}}>
+                        <option >Mã nhân viên tăng dần</option>
+                        <option >Mã nhân viên giảm dần</option>
                     </select>
                 </div>
             </div>

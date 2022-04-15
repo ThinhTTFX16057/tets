@@ -56,7 +56,7 @@ function StaffInfo(props){
                     <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
                 </Breadcrumb>
                 <div id="menubar" className='container-fluid'>
-                    <div className="floatleft"><h3>Danh sách phòng ban</h3>
+                    <div className="floatleft"><h3>Thông tin nhân viên</h3>
                     </div>
                     <div className="floatright">
                         <input id="search" type="text" placeholder="mã nhân viên"></input>

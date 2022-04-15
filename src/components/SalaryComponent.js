@@ -58,8 +58,8 @@ const Salary=(props)=>{
                             if (statesSalary!=="salary"){return changeStateSalary("salary")}
                             else if (statesSalary==="salary"){return changeStateSalary("id")}
                         }}>
-                            <option >Mã nhân viên</option>
-                            <option >Mức lương</option>
+                            <option >Mã nhân viên tăng dần</option>
+                            <option >Mức lương tăng dần</option>
                         </select>
                     </div>
                 </div>

@@ -5,15 +5,17 @@ import {Link} from 'react-router-dom';
 
 function RenderStaff({staffs}){return(
     staffs.map((x)=>{return(
-        <Card key={x.id} className="col-md-2 col-sm-4 col-xs-6">
+        <div className="col-md-2 col-sm-4 col-6">
+        <Card key={x.id} >
             <Link to={`/staff/${x.id}`}>
-            <CardImg className="col-md-12 col-xs-2 my-3" src={x.image} alt={x.name}/>
-            <CardBody className="col-md-12 colxs-10">
+            <CardImg className=" my-3" src={x.image} alt={x.name}/>
+            <CardBody className="">
                 <CardTitle>{x.name}</CardTitle>
                 <CardText><p>Phòng ban: {x.department.name}</p></CardText>
             </CardBody>
             </Link>
         </Card>
+        </div>
         );
     })
 );}
@@ -35,11 +37,11 @@ function StaffList(props){return(
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div className="row">
-                <RenderStaff staffs={props.staffs}/>
-            </div>
+        
+        <div className="row">
+            <RenderStaff staffs={props.staffs}/>
         </div>
+        
     </div>
 );}
 

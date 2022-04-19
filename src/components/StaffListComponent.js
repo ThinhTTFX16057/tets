@@ -38,6 +38,7 @@ class StaffList extends Component{
             isSortModalOpen: false,
             sortAToZ: true,
 
+            isSearchModalOpen: false,
             nameSearch: "",
         }
         this.toggleAddModal= this.toggleAddModal.bind(this);
@@ -45,7 +46,8 @@ class StaffList extends Component{
         this.handleBlur = this.handleBlur.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         
-        this.toggleSearchName=this.toggleSearchName.bind(this);
+        this.toggleSearchModal= this.toggleSearchModal.bind(this);
+        this.searchName=this.searchName.bind(this);
         
         this.toggleSortModal= this.toggleSortModal.bind(this);
         this.toggleSort=this.toggleSort.bind(this)
@@ -72,21 +74,26 @@ class StaffList extends Component{
         if (this.state.touched.doB && doB==="") 
             errors.doB = "Vui lòng nhập ngày sinh";
             
-        const reg = /^\d+$/;
+        const reg = /^\d*(\.\d+)?$/;
         if (this.state.touched.salaryScale && !reg.test(salaryScale))
             errors.salaryScale = "Vui lòng nhập hệ số lương là số";
         if (this.state.touched.salaryScale && salaryScale<1)
-            errors.salaryScale = "Hệ số lương tối thiểu là 1";
+            errors.salaryScale = "Hệ số lương tối thiểu là 1!!!";
 
         if (this.state.touched.startDate && startDate==="") 
             errors.startDate = "Vui lòng nhập ngày vào công ty";
         if (startDate<doB)
             errors.startDate = "Ngày vào công ty nhỏ hơn ngày sinh!!!";
 
+        if (this.state.touched.annualLeave && annualLeave==="")
+            errors.annualLeave = "Vui lòng nhập số ngày nghỉ còn lại tối thiểu là 0";
         if (this.state.touched.annualLeave && !reg.test(annualLeave))
-            errors.annualLeave = "Vui lòng nhập số ngày nghỉ còn lại nhỏ nhất là 0";
+            errors.annualLeave = "Số ngày nghỉ còn lại là số dương!!!";
+
+        if (this.state.touched.overTime && overTime==="")
+            errors.overTime = "Vui lòng nhập số giờ đã làm thêm tối thiểu là 0";
         if (this.state.touched.overTime && !reg.test(overTime))
-            errors.overTime = "Vui lòng nhập số giờ đã làm thêm nhỏ nhất là 0";
+            errors.overTime = "Số giờ đã làm thêm là số dương!!!";
         return errors;
     }
     //Them nhan vien vao StaffList
@@ -98,15 +105,24 @@ class StaffList extends Component{
     //SORT FUNCTION//
     toggleSortModal() {this.setState({
         isSortModalOpen: !this.state.isSortModalOpen
-    })};
+        });
+    };
     toggleSort(kind){this.setState({
         sortAToZ:!kind,
         isSortModalOpen: !this.state.isSortModalOpen
-    })};
+        });
+    };
     //SEARCH FUNCTION//
-    toggleSearchName(value){this.setState({
-        nameSearch:value
-    })};    
+    toggleSearchModal() {this.setState({
+        isSearchModalOpen: !this.state.isSearchModalOpen
+        });
+    };
+    searchName(event) {
+        event.preventDefault();
+        const keyword = event.target.keyword.value;
+        this.setState({ nameSearch: keyword});
+        this.toggleSearchModal();
+    }
 
     render(){
         const errors = this.validate(this.state.name,this.state.doB,this.state.salaryScale,this.state.startDate,this.state.department,this.state.annualLeave,this.state.overTime);
@@ -135,8 +151,9 @@ class StaffList extends Component{
                         <div className="floatleft"><h3><i class="fa fa-address-book-o" aria-hidden="true"></i> Danh sách nhân viên</h3>
                         </div>
                         <div className="floatright mx-2 sort">
+                            <Button outline onClick={this.toggleSearchModal}>
                             <strong><span class="glyphicon glyphicon-search"></span>{` Search `}</strong>
-                            <input id="search" type="text" placeholder=" họ tên nhân viên" onChange={(e)=>this.toggleSearchName(e.target.value)}/>
+                            </Button>
                         </div>
                         <div className="floatright mx-2 sort">
                             <strong><i class="fa fa-sort fa-lg" aria-hidden="true"></i>{` Sort`}</strong>
@@ -155,6 +172,25 @@ class StaffList extends Component{
                 <div className="row">
                     {displaystaff}
                 </div>
+                <Modal isOpen={this.state.isSearchModalOpen} toggle={this.toggleSearchModal} >
+                    <ModalHeader toggle={this.toggleSearchModal}><strong>TÌM KIẾM NHÂN VIÊN</strong></ModalHeader>
+                    <ModalBody>
+                        <Form onSubmit={this.searchName}>
+                        <FormGroup row>
+                            <Label htmlFor="search" md={2}>Họ tên nhân viên</Label>
+                            <Col md={10}>
+                                <Input type="text" id="search" name="keyword" placeholder="Họ tên nhân viên"/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Col md={{ size: 10, offset: 2 }}>
+                            <Button type="submit" className="btn btn-success btn-lg">Bắt đầu tìm</Button>
+                            </Col>
+                        </FormGroup>
+                        </Form>
+                    </ModalBody>
+                </Modal>
+
 
                 <Modal isOpen={this.state.isAddModalOpen} toggle={this.toggleAddModal} >
                     <ModalHeader toggle={this.toggleAddModal}><strong>THÊM NHÂN VIÊN</strong></ModalHeader>
@@ -242,7 +278,7 @@ class StaffList extends Component{
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label htmlFor="overTime" md={2}>Số ngày đã làm thêm</Label>
+                            <Label htmlFor="overTime" md={2}>Số giờ đã làm thêm</Label>
                             <Col md={10}>
                             <Input type="text" id="overTime" name="overTime" 
                                 

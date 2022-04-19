@@ -18,21 +18,21 @@ function RenderSalary({staff}){
     );
 } 
 
-const Salary=(props)=>{
-    const [statesSalary, changeStateSalary] = useState("");
+function Salary(props){
+    const [states, changeState] = useState(false);
     const [name,changeName] = useState("");
     const displaysalary=
         props.staffs
         .sort((a,b)=>
-            statesSalary==="salary"? parseInt(a.salaryScale*3000000+a.overTime*200000/8) - parseInt(b.salaryScale*3000000+b.overTime*200000/8):a.id-b.id
+            states? parseInt(a.salaryScale*3000000+a.overTime*200000/8) - parseInt(b.salaryScale*3000000+b.overTime*200000/8):a.id-b.id
         )
-        .filter((staff)=>{
-            if (name===""){return (staff)}
-            else if(staff.name.toLowerCase().includes(name.toLowerCase())){return(staff)}
+        .filter((x)=>{
+            if (name===""){return (x)}
+            else if(x.name.toLowerCase().includes(name.toLowerCase())){return(x)}
             else{return 0}
         })
-        .map((staff) => {
-            return(<RenderSalary staff={staff} />)
+        .map((x) => {
+            return(<RenderSalary staff={x} />)
         })
         
     
@@ -54,10 +54,7 @@ const Salary=(props)=>{
                 </div>
 
                     <div className="floatright sort"><i class="fa fa-sort fa-lg" aria-hidden="true"></i>
-                        <select onChange={()=>{
-                            if (statesSalary!=="salary"){return changeStateSalary("salary")}
-                            else if (statesSalary==="salary"){return changeStateSalary("id")}
-                        }}>
+                        <select onChange={()=>{changeState(!states)}}>
                             <option >Mã nhân viên tăng dần</option>
                             <option >Mức lương tăng dần</option>
                         </select>

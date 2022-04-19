@@ -12,11 +12,11 @@ class Header extends Component {
         };
       }
 
-      toggleNav() {
+    toggleNav() {
         this.setState({
           isNavOpen: !this.state.isNavOpen
         });
-      }
+    }
 
     render() {
         return(

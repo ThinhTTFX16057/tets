@@ -17,9 +17,15 @@ class Main extends Component{
             staffs: STAFFS,
             departments: DEPARTMENTS
         }
+        this.addStaff = this.addStaff.bind(this);
     }
     
-    
+    addStaff = (x) => {
+      const id = this.state.staffs.length;
+      const newStaff = { id, ...x };
+      this.setState({staffs: [...this.state.staffs, newStaff]});
+      };
+
     render(){
         const StaffWithId=({match})=>{
             return(
@@ -37,7 +43,7 @@ class Main extends Component{
                   ()=><Home staffs={this.state.staffs}/>
               }/>
             <Route exact path="/staff" component={
-                  ()=><StaffList staffs={this.state.staffs}/>
+                  ()=><StaffList addStaff={this.addStaff} staffs={this.state.staffs}/>
                 }/>
             <Route path="/staff/:staffId" component={StaffWithId}/>
             <Route exact path="/department" component={

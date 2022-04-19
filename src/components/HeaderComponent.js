@@ -8,7 +8,7 @@ class Header extends Component {
     
         this.toggleNav = this.toggleNav.bind(this);
         this.state = {
-          isNavOpen: false
+          isNavOpen: true
         };
       }
 
@@ -23,17 +23,17 @@ class Header extends Component {
             <div className="header container-fluid">
                 <div className="clearfix">
                     <img width="30" height="30" src="assets/images/logo.png" alt="applogo"></img>
-                    <div className="row floatleft d-inline-block">    
-                        <h4 style={{fontSize:"25px"}}>Staff Management App v2.0</h4>
+                    <div className="row floatleft d-inline-block ml-3">    
+                        <h4 style={{fontSize:"4vw"}}>Staff Management App v2.0</h4>
                     </div>
-                    <div className="row floatright d-inline-block mt-3">
-                        <h4 style={{fontSize:"15px"}} className="fa fa-sign-in"> Đăng nhập</h4>
+                    <div className="row floatright d-inline-block m-3">
+                        <h4 style={{fontSize:"2vw"}} className="fa fa-sign-in"> Đăng nhập</h4>
                     </div>
                 </div>
-                <Navbar dark expand="lg">
+                <Navbar dark expand="sm">
                     <button aria-label="Toggle navigation" type="button" className="navbar-toggler" onClick={this.toggleNav}><span class="navbar-toggler-icon"></span>Menu</button>
-                    <Collapse isOpen={this.state.isNavOpen} style={{display:"flex"}}>
-                        <Nav style={{display:"inline-flex"}}>
+                    <Collapse isOpen={this.state.isNavOpen}>
+                        <Nav>
                             <NavItem>
                                 <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Trang chủ</NavLink>
                             </NavItem>

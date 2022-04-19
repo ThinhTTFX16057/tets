@@ -4,8 +4,7 @@
 .floatleft{float:left}
 .floatright{float:right}
 .navbar-toggler{ background-color:#000000;color: white !important;display:none}
-.navbar-collapse{flex-basis:unset}
-.navbar{padding:0;margin:0 -10px;background-color: rgb(255, 255, 255);color:black}
+.navbar{padding:0;margin:0 -20px;background-color: rgb(255, 255, 255);color:black;justify-content: center;}
 .navbar-dark{color:black}
 .nav-item{padding-left:25px;font-size:15px}
 .nav-link{text-align:left;color:black}
@@ -25,14 +24,14 @@
 /*End CSS HomeComponent*/
 
 /*CSS StaffListComponent*/
-.breadcrumb{background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(11,49,146,1));margin: -10px;padding:20px 0 10px 15px;}
+.breadcrumb{width:100%;background-image: linear-gradient(to left, rgba(255,0,0,0), rgba(11,49,146,1));margin: -10px -10px -10px 0;padding:20px 0 10px 15px;}
 .breadcrumb-item.active{color:white; font-size:small}
 .breadcrumb-item a{color:white;text-decoration: none; font-size:small;font-weight:bold}
 #menubar{margin-top:15px;border-bottom:1px solid rgb(185, 184, 184)}
 #search{border-radius:3px;border:1px solid black;padding:2.5px 0}
 #menubar button:hover{background-color: black;color:white}
 .title{width:120px;display:inline-block}
-.card{margin:10px 0;border:1px solid rgb(185, 184, 184);background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(209,237,252,1))}
+.card{margin:5px 0;border:1px solid rgb(185, 184, 184);background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(209,237,252,1))}
 .card-img{border-radius:50%;max-width: 150px;display: block;margin-left: auto;margin-right: auto;}
 .card-title{text-align: center;font-weight:800;font-size:large}
 .card-text{text-align: center;font-size:small}

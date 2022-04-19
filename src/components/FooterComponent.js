@@ -23,20 +23,16 @@ function Footer(props){
                           thinhttfx16057@funix.edu.vn</a>
                         </address>
                     </div>
-                    <div className="d-inline-block col-md-4 col-12 ">
-                        <div className="row ">    
-                            <h4 className="text-center">Liên kết</h4>
-                        </div>
+                    <div className="d-inline-block col-md-4 col-12 text-center">
+                        <h4>Liên kết</h4>
                         <ul id="social-link" className="list-unstyled">
                             <li className="d-inline-block"><a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus"></i></a></li>
                             <li className="d-inline-block"><a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a></li>
                             <li className="d-inline-block"><a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a></li>
                             <li className="d-inline-block"><a className="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i className="fa fa-twitter"></i></a></li>
                             <li className="d-inline-block"><a className="btn btn-social-icon btn-google" href="http://youtube.com/"><i className="fa fa-youtube"></i></a></li>
-                        </ul>
-                        <div className="row text-center">             
-                            <p><strong>© Copyright 2018 Ristorante Con Fusion</strong></p>
-                        </div>
+                        </ul>             
+                        <p><strong>© Copyright 2018 Ristorante Con Fusion</strong></p>
                     </div>
                 </div>
                 

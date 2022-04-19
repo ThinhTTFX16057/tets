@@ -48,12 +48,13 @@ function Salary(props){
                     <div className="floatleft"><h3><i class="fa fa-money" aria-hidden="true"></i> Bảng lương nhân viên</h3>
                     </div>
                     
-                    <div className="floatright">
-                <input id="search" type="text" placeholder=" họ tên nhân viên" value={name} onChange={(e)=>changeName(e.target.value)}></input>
-                <span class="glyphicon glyphicon-search"></span>Tìm kiếm
-                </div>
+                    <div className="floatright mx-2 sort">
+                        <strong><span class="glyphicon glyphicon-search"></span>{` Search `}</strong>
+                        <input id="search" type="text" placeholder=" họ tên nhân viên" value={name} onChange={(e)=>changeName(e.target.value)}></input>
+                    </div>
 
-                    <div className="floatright sort"><i class="fa fa-sort fa-lg" aria-hidden="true"></i>
+                    <div className="floatright mx-2 sort">
+                        <strong><i class="fa fa-sort fa-lg" aria-hidden="true"></i>{` Sort`}</strong>
                         <select onChange={()=>{changeState(!states)}}>
                             <option >Mã nhân viên tăng dần</option>
                             <option >Mức lương tăng dần</option>

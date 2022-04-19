@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardImg,CardBody, Navbar, NavbarBrand, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import {CardImg,CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link} from "react-router-dom";
 import dateFormat from 'dateformat';
 
@@ -26,7 +26,7 @@ function RenderInfo({staff}){return(
         
             <div className="my-3">
                 <div className="title"><strong>Phòng ban:</strong></div>
-                <input type="text" disabled value={staff.department.name}></input>
+                <input type="text" disabled value={staff.department.name ? staff.department.name : staff.department}></input>
             </div>
         
         

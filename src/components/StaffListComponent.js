@@ -27,7 +27,7 @@ class StaffList extends Component{
             doB: "",
             salaryScale: "",
             startDate: "",
-            department: "",
+            department: "Sale",
             annualLeave: "",
             overTime: "",
             image: "/assets/images/alberto.png",
@@ -62,24 +62,27 @@ class StaffList extends Component{
         const name = event.target.name;
         this.setState({[name]: value});
     }
-    validate(name,department,salaryScale,doB,startDate,annualLeave,overTime) {
+    validate(name,doB,salaryScale,startDate,department,annualLeave,overTime) {
         const errors = {name: "",doB: "",salaryScale: "",startDate: "",department: "",annualLeave: "",overTime: ""};
-        if (this.state.touched.name && name==="")
-            errors.name = "Vui lòng nhập họ tên";
-        if (name.length < 2 || name.length > 50)
-            errors.name = "Họ tên nằm trong khoảng 2 - 50 kí tự";
+        if (this.state.touched.name && name.length<2)
+            errors.name = "Vui lòng nhập họ tên tối thiểu 3 kí tự";
+        if (this.state.touched.name && name.length > 30)
+            errors.name = "Vui lòng nhập họ tên tối đa 30 kí tự";
+
         if (this.state.touched.doB && doB==="") 
             errors.doB = "Vui lòng nhập ngày sinh";
+            
         const reg = /^\d+$/;
         if (this.state.touched.salaryScale && !reg.test(salaryScale))
-            errors.salaryScale = "Vui lòng nhập hệ số lương";
+            errors.salaryScale = "Vui lòng nhập hệ số lương là số";
         if (this.state.touched.salaryScale && salaryScale<1)
-            errors.salaryScale = "Hệ số lương nhỏ nhất là 1";
+            errors.salaryScale = "Hệ số lương tối thiểu là 1";
+
         if (this.state.touched.startDate && startDate==="") 
             errors.startDate = "Vui lòng nhập ngày vào công ty";
-            
-        if (this.state.touched.department && department==="")
-            errors.department = "Vui lòng chọn phòng ban đang làm việc";
+        if (startDate<doB)
+            errors.startDate = "Ngày vào công ty nhỏ hơn ngày sinh!!!";
+
         if (this.state.touched.annualLeave && !reg.test(annualLeave))
             errors.annualLeave = "Vui lòng nhập số ngày nghỉ còn lại nhỏ nhất là 0";
         if (this.state.touched.overTime && !reg.test(overTime))
@@ -131,7 +134,6 @@ class StaffList extends Component{
                     <div id="menubar" className='container-fluid'>
                         <div className="floatleft"><h3><i class="fa fa-address-book-o" aria-hidden="true"></i> Danh sách nhân viên</h3>
                         </div>
-
                         <div className="floatright mx-2 sort">
                             <strong><span class="glyphicon glyphicon-search"></span>{` Search `}</strong>
                             <input id="search" type="text" placeholder=" họ tên nhân viên" onChange={(e)=>this.toggleSearchName(e.target.value)}/>
@@ -163,7 +165,7 @@ class StaffList extends Component{
                             <Col md={10}>
                             <Input type="text" id="name" name="name"
                                 placeholder="Họ tên"
-                                value={this.state.name}
+                                
                                 valid={errors.name === ""}
                                 invalid={errors.name !== ""}
                                 onBlur={this.handleBlur("name")}
@@ -176,7 +178,7 @@ class StaffList extends Component{
                             <Label htmlFor="doB" md={2}>Ngày sinh</Label>
                             <Col md={10}>
                             <Input type="date" id="doB" name="doB"
-                                value={this.state.doB}
+                                
                                 valid={errors.doB === ""}
                                 invalid={errors.doB !== ""}
                                 onBlur={this.handleBlur("doB")}
@@ -189,7 +191,7 @@ class StaffList extends Component{
                             <Label htmlFor="salaryScale" md={2}>Hệ số lương</Label>
                             <Col md={10}>
                             <Input type="text" id="salaryScale" name="salaryScale" 
-                                value={this.state.salaryScale}
+                                
                                 valid={errors.salaryScale === ""}
                                 invalid={errors.salaryScale !== ""}
                                 onBlur={this.handleBlur("salaryScale")}
@@ -202,7 +204,7 @@ class StaffList extends Component{
                             <Label htmlFor="startDate" md={2}>Ngày vào công ty</Label>
                             <Col md={10}>
                             <Input type="date" id="startDate" name="startDate"
-                                value={this.state.startDate}
+                                
                                 valid={errors.startDate === ""}
                                 invalid={errors.startDate !== ""}
                                 onBlur={this.handleBlur("startDate")}
@@ -215,26 +217,22 @@ class StaffList extends Component{
                             <Label htmlFor="department" md={2}>Phòng ban</Label>
                             <Col md={10}>
                             <Input type="select" id="department" name="department"
-                                value={this.state.department}
-                                valid={errors.department === ""}
-                                invalid={errors.department !== ""}
-                                onBlur={this.handleBlur("department")}
+                               
                                 onChange={this.handleInputChange}
                             >
-                                <option>Sale</option>
+                                <option selected>Sale</option>
                                 <option>HR</option>
                                 <option>Marketing</option>
                                 <option>IT</option>
                                 <option>Finance</option>
                             </Input>
-                            <FormFeedback>{errors.department}</FormFeedback>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Label htmlFor="annualLeave" md={2}>Số ngày nghỉ còn lại</Label>
                             <Col md={10}>
                             <Input type="text" id="annualLeave" name="annualLeave"
-                                value={this.state.annualLeave}
+                              
                                 valid={errors.annualLeave === ""}
                                 invalid={errors.annualLeave !== ""}
                                 onBlur={this.handleBlur("annualLeave")}
@@ -247,7 +245,7 @@ class StaffList extends Component{
                             <Label htmlFor="overTime" md={2}>Số ngày đã làm thêm</Label>
                             <Col md={10}>
                             <Input type="text" id="overTime" name="overTime" 
-                                value={this.state.overTime}
+                                
                                 valid={errors.overTime === ""}
                                 invalid={errors.overTime !== ""}
                                 onBlur={this.handleBlur("overTime")}

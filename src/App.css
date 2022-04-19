@@ -1,6 +1,6 @@
 /*CSS header*/
 .header {background-color: rgb(11, 49, 146);color:white}
-.header img{float:left}
+.header img{float:left;margin: 5px}
 .floatleft{float:left}
 .floatright{float:right}
 .navbar-toggler{ background-color:#000000;color: white !important;display:none}

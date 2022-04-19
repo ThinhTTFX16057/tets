@@ -5,9 +5,6 @@ import Main from './components/MainComponent';
 
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
 
   render(){return (
     <BrowserRouter>

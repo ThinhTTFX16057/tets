@@ -24,7 +24,7 @@ class Header extends Component {
                 <div className="clearfix">
                     <img width="30" height="30" src="assets/images/logo.png" alt="applogo"></img>
                     <div className="row floatleft d-inline-block ml-3">    
-                        <h4 style={{fontSize:"4vw"}}>Staff Management App v2.0</h4>
+                        <h4 style={{fontSize:"3vw"}}>Staff Management App v2.0</h4>
                     </div>
                     <div className="row floatright d-inline-block m-3">
                         <h4 style={{fontSize:"2vw"}} className="fa fa-sign-in"> Đăng nhập</h4>

@@ -1,8 +1,20 @@
 import React from "react";
 import {Card, CardBody,CardText, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
-function RenderDepartment({departments}){return(
+function RenderDepartment({departments,isLoading,errMess}){
+    if (isLoading){
+        return(
+          <Loading/>
+        );
+      }
+    else if (errMess){
+        return(
+          <h4>{errMess}</h4>
+        );
+      }
+    else return(
     departments.map((x)=>{
         return(
             <Card kex={x.id} className='col-md-4 col-sm-6 col-12 my-2'>
@@ -14,7 +26,28 @@ function RenderDepartment({departments}){return(
         );
     })
 );}   
-function Department(props){return(
+function Department(props){
+    if (props.departments.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.departments.errMess) {
+        return(
+            <div className="container">
+                <div className="row"> 
+                    <div className="col-12">
+                        <h4>{props.departments.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    else return(
     <div className="container-fluid">
         <div className='row'>
             <Breadcrumb>
@@ -29,7 +62,10 @@ function Department(props){return(
         </div>
         <div class="container-fluid">
             <div className="row">
-                <RenderDepartment departments={props.departments}/>
+                <RenderDepartment 
+                departments={props.departments} 
+                isLoading={props.deptsLoading} 
+                errMess={props.deptsErrMess}/>
             </div>
         </div>
     </div>

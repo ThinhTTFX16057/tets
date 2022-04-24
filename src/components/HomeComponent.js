@@ -1,9 +1,19 @@
 import React from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
-
+import { Loading } from './LoadingComponent';
 
 function Home(props){
-    return (
+  if (props.isLoading){
+    return(
+      <Loading/>
+    );
+  }
+  else if (props.errMess){
+    return(
+      <h4>{props.errMess}</h4>
+    );
+  }
+  else return(
       <div className='container-fluid'>
         <div className='row col-md-4 col-sm-4 col-xs-5 floatleft chart'>
           <PieChart

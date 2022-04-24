@@ -4,33 +4,47 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Salary from './SalaryComponent';
 import Department from './DepartmentComponent';
+
 import StaffList from './StaffListComponent';
 import StaffInfo from './StaffInfoComponent';
-import { STAFFS } from '../shared/staffs';
-import { DEPARTMENTS } from '../shared/staffs';
-import {Switch, Route, Redirect} from 'react-router-dom';
 
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+
+import { connect } from 'react-redux';
+import { addStaff, fetchStaffs, fetchDepts, fetchSS } from '../redux/ActionCreators';
+
+//mapStateToProps để lấy được state từ store truyền thành props cho các components trong Route ở dưới
+const mapStateToProps = state => {
+    return {
+      staffs: state.staffs,
+      departments: state.departments,
+      staffsSalary: state.staffsSalary
+    }
+}
+//mapDispatchToProps để lấy được func từ store truyền thành props cho các components trong Route ở dưới
+const mapDispatchToProps = (dispatch) => ({
+    addStaff: (name, doB, salaryScale, startDate, department, annualLeave, overTime) => dispatch(addStaff(name, doB, salaryScale, startDate, department, annualLeave, overTime)),
+    fetchStaffs: () => { dispatch(fetchStaffs() )},
+    fetchDepts: () => { dispatch(fetchDepts() )},
+    fetchSS: () => { dispatch(fetchSS() )},
+  
+});
 class Main extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            staffs: STAFFS,
-            departments: DEPARTMENTS
-        }
-        this.addStaff = this.addStaff.bind(this);
     }
-    
-    addStaff = (x) => {
-      const id = this.state.staffs.length;
-      const newStaff = { id, ...x };
-      this.setState({staffs: [...this.state.staffs, newStaff]});
-      };
-
+    componentDidMount() {
+        this.props.fetchStaffs();
+        this.props.fetchDepts();
+        this.props.fetchSS();
+      }
     render(){
         const StaffWithId=({match})=>{
             return(
             <StaffInfo
-            staff={this.state.staffs.filter((staff)=>staff.id===parseInt(match.params.staffId,10))[0]}
+            staff={this.props.staffs.staffs.filter((staff)=>staff.id===parseInt(match.params.staffId,10))[0]}
+            isLoading={this.props.staffs.isLoading}
+            errMess={this.props.staffs.errMess}
             />
             );
         }
@@ -40,17 +54,32 @@ class Main extends Component{
             <Header/>
             <Switch>
             <Route path='/home' component={
-                  ()=><Home staffs={this.state.staffs}/>
+                  ()=><Home
+                    staffs={this.props.staffs.staffs} 
+                    isLoading={this.props.staffs.isLoading}
+                    errMess={this.props.staffs.errMess}
+                  />
               }/>
-            <Route exact path="/staff" component={
-                  ()=><StaffList addStaff={this.addStaff} staffs={this.state.staffs}/>
-                }/>
+            <Route exact path="/staff" component={()=>
+                <StaffList 
+                    staffs={this.props.staffs} 
+                    addStaff={this.props.addStaff}
+                    staffsLoading={this.props.staffs.isLoading}
+                    staffsErrMess={this.props.staffs.errMess}
+                />}
+            />
             <Route path="/staff/:staffId" component={StaffWithId}/>
             <Route exact path="/department" component={
-                  ()=><Department departments={this.state.departments}/>
+                  ()=><Department departments={this.props.departments.departments}
+                  deptsLoading={this.props.departments.isLoading}
+                  deptsErrMess={this.props.departments.errMess}
+                    />
                 }/>
             <Route exact path="/salary" component={
-                    ()=><Salary staffs={this.state.staffs}/>
+                    ()=><Salary staffsSalary={this.props.staffsSalary.staffsSalary}
+                    ssLoading={this.props.staffsSalary.isLoading}
+                    ssErrMess={this.props.staffsSalary.errMess}
+                    />
                   }/>
             <Redirect to="/home"/>
             </Switch>
@@ -59,4 +88,4 @@ class Main extends Component{
     )}
 }
 
-export default Main;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

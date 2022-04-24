@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import {Card, CardImg, CardTitle,CardBody,CardText, Breadcrumb, BreadcrumbItem,  Button, Modal, ModalHeader, ModalBody, Row, Col, Label, Input, Form, FormGroup, FormFeedback} from 'reactstrap';
+import {Card, CardImg, CardTitle,CardBody,CardText, Breadcrumb, BreadcrumbItem,  Button, Modal, ModalHeader, ModalBody, Row, Col, Label, Input, Form, FormGroup} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || (val.length <= len);
@@ -9,8 +10,18 @@ const minLength = (len) => (val) => val && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 const minNum = (num) => (val) => !val || (val >= num);
 
-const RenderStaff=({staff})=>{
-    return(
+const RenderStaff=({staff,isLoading, errMess})=>{
+    if (isLoading){
+        return(
+          <Loading/>
+        );
+      }
+    else if (errMess){
+        return(
+          <h4>{errMess}</h4>
+        );
+      }
+    else return(
         <div className="col-md-2 col-sm-4 col-6 my-2">
             <Card style={{height:"100%"}} key={staff.id} >
                 <Link to={`/staff/${staff.id}`}>
@@ -18,7 +29,7 @@ const RenderStaff=({staff})=>{
                 <CardBody className="">
                     <CardTitle>{staff.name}</CardTitle>
                     <CardText><p>Mã ID: {staff.id}</p></CardText>
-                    <CardText><p>Phòng ban: {staff.department.name ? staff.department.name : staff.department}</p></CardText>
+                    <CardText><p>Phòng ban: {staff.departmentId ? staff.departmentId : staff.department}</p></CardText>
                 </CardBody>
                 </Link>
             </Card>
@@ -29,9 +40,6 @@ class StaffList extends Component{
     constructor(props){
         super(props);
         this.state={
-            doB: "",
-            startDate: "",
-            touched: {doB: false,startDate: false},
             isAddModalOpen: false,
             
             isSortModalOpen: false,
@@ -41,8 +49,6 @@ class StaffList extends Component{
             nameSearch: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
 
         this.toggleAddModal= this.toggleAddModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,45 +62,9 @@ class StaffList extends Component{
     
     //ADD FUNCTION//
     toggleAddModal() {this.setState({isAddModalOpen: !this.state.isAddModalOpen})}
-    handleBlur = (field) => (evt) => {
-        this.setState({touched: { ...this.state.touched, [field]: true }});
-    };
-    
-    handleInputChange(event) {
-        const value = event.target.value;
-        const name = event.target.name;
-        this.setState({[name]: value});
-    }
-    validate(doB, startDate) {
-        const errors = {doB: "",startDate: ""};
-    
-        if (this.state.touched.doB && doB==="") 
-            errors.doB = "Vui lòng nhập ngày sinh. ";
-
-        if (this.state.touched.startDate && startDate==="")
-          errors.startDate = "Vui lòng nhập ngày vào công ty";
-        if (startDate < doB)
-            errors.startDate = "Ngày vào công ty phải lớn hơn ngày sinh!"
-    
-        return errors;
-    }
     //Them nhan vien vao StaffList
     handleSubmit (value) {
-        const x = {
-            name: value.name,
-            doB: this.state.doB,
-            salaryScale: value.salaryScale,
-            startDate: this.state.startDate,
-            department: value.department,
-            annualLeave: value.annualLeave,
-            overTime: value.overTime,
-            image: "/assets/images/alberto.png"
-        };
-        
-        if (!this.state.doB || !this.state.startDate)
-            this.setState({touched: { doB: true, startDate: true } });
-        else this.props.addStaff(x);
-        
+        this.props.addStaff(value.name, value.doB, value.salaryScale, value.startDate, value.department,value.annualLeave, value.overTime);
     };
     //SORT FUNCTION//
     toggleSortModal() {this.setState({
@@ -119,9 +89,7 @@ class StaffList extends Component{
     }
 
     render(){
-        const errors = this.validate(this.state.doB, this.state.startDate);
-
-        const displaystaff=this.props.staffs
+        const displaystaff=this.props.staffs.staffs
             .sort((a,b)=>
                 this.state.sortAToZ ? a.id - b.id : b.id - a.id
             )
@@ -131,9 +99,32 @@ class StaffList extends Component{
                 else{return 0}
             })
             .map((x) => {
-                return(<RenderStaff staff={x} />)
+                return(<RenderStaff 
+                    staff={x} 
+                    isLoading={this.props.staffsLoading} 
+                    errMess={this.props.staffsErrMess}/>)
             });
-        return(
+        if (this.props.staffs.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (this.props.staffs.errMess) {
+            return(
+                <div className="container">
+                    <div className="row"> 
+                        <div className="col-12">
+                            <h4>{this.props.dishes.errMess}</h4>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        else return(
             <div className="container-fluid">
                 <div className='row'>
                     <Breadcrumb>
@@ -206,13 +197,14 @@ class StaffList extends Component{
                             <Row className="form-group">
                                 <Label htmlFor="doB" md={2}>Ngày sinh</Label>
                                 <Col md={10}>
-                                    <Input type="date" name="doB" id="doB"
-                                        valid={errors.doB === ""}
-                                        invalid={errors.doB !== ""}
-                                        onBlur={this.handleBlur("doB")}
-                                        onChange={this.handleInputChange}
+                                    <Control.text type="date" model=".doB" id="doB" name="doB" className="form-control"
+                                        validators={{required}}
                                     />
-                                    <FormFeedback>{errors.doB}</FormFeedback>
+                                    <Errors model=".doB" className="text-danger" show="touched"
+                                        messages={{
+                                            required: "Vui lòng nhập ngày sinh. ",
+                                        }}
+                                    />
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -233,13 +225,14 @@ class StaffList extends Component{
                             <Row className="form-group">
                                 <Label htmlFor="startDate" md={2}>Ngày vào công ty</Label>
                                 <Col md={10}>
-                                    <Input type="date" name="startDate" id="startDate"
-                                        valid={errors.startDate === ""}
-                                        invalid={errors.startDate !== ""}
-                                        onBlur={this.handleBlur("startDate")}
-                                        onChange={this.handleInputChange}
+                                    <Control.text type="date" model=".startDate" id="startDate" name="startDate" className="form-control"
+                                        validators={{required}}
                                     />
-                                    <FormFeedback>{errors.startDate}</FormFeedback>
+                                    <Errors model=".startDate" className="text-danger" show="touched"
+                                        messages={{
+                                            required: "Vui lòng nhập ngày vào công ty. ",
+                                        }}
+                                    />
                                 </Col>
                             </Row>
                             <Row className="form-group">

@@ -1,18 +1,28 @@
 import React, {useState} from "react";
 import {Card,CardText, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 
-function RenderSalary({staff}){
-    return(
-        <div key={staff.id} className='col-md-4 col-sm-6 col-12'>
+function RenderSalary({staffsSalary,isLoading,errMess}){
+    if (isLoading){
+        return(
+          <Loading/>
+        );
+      }
+    else if (errMess){
+        return(
+          <h4>{errMess}</h4>
+        );
+      }
+    else return(
+        <div key={staffsSalary.id} className='col-md-4 col-sm-6 col-12'>
             <Card style={{border:"1px solid black"}}>
-                <CardTitle>{staff.name}</CardTitle>
-                <CardText>Mã nhân viên: {staff.id}</CardText>
-                <CardText>Hệ số lương: {staff.salaryScale}</CardText>
-                <CardText>Số giờ làm thêm: {staff.overTime}</CardText>
-                <CardText><input type="text" disabled value={`Lương: ${parseInt(staff.salaryScale
-                *3000000+staff.overTime*200000/8).toLocaleString()} VNĐ`}></input></CardText>
+                <CardTitle>{staffsSalary.name}</CardTitle>
+                <CardText>Mã nhân viên: {staffsSalary.id}</CardText>
+                <CardText>Hệ số lương: {staffsSalary.salaryScale}</CardText>
+                <CardText>Số giờ làm thêm: {staffsSalary.overTime}</CardText>
+                <CardText><input type="text" disabled value={`Lương: ${staffsSalary.salary} VNĐ`}></input></CardText>
             </Card>
         </div>
     );
@@ -22,9 +32,9 @@ function Salary(props){
     const [states, changeState] = useState(false);
     const [name,changeName] = useState("");
     const displaysalary=
-        props.staffs
+        props.staffsSalary
         .sort((a,b)=>
-            states? parseInt(a.salaryScale*3000000+a.overTime*200000/8) - parseInt(b.salaryScale*3000000+b.overTime*200000/8):a.id-b.id
+            states? a.salary-b.salary:a.id-b.id
         )
         .filter((x)=>{
             if (name===""){return (x)}
@@ -32,12 +42,34 @@ function Salary(props){
             else{return 0}
         })
         .map((x) => {
-            return(<RenderSalary staff={x} />)
+            return(
+            <RenderSalary
+                staffsSalary={x}
+                isLoading={props.ssLoading} 
+                errMess={props.ssErrMess}
+            />)
         })
-        
-    
-
-    return(
+    if (props.staffsSalary.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.staffsSalary.errMess) {
+        return(
+            <div className="container">
+                <div className="row"> 
+                    <div className="col-12">
+                        <h4>{props.staffsSalary.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    else return(
         <div className="container-fluid">
             <div className='row'>
                 <Breadcrumb>

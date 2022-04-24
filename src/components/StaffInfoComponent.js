@@ -2,6 +2,7 @@ import React from 'react';
 import {CardImg,CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link} from "react-router-dom";
 import dateFormat from 'dateformat';
+import { Loading } from './LoadingComponent';
 
 function RenderInfo({staff}){return(
     <div key={staff.id} className="row">
@@ -26,7 +27,7 @@ function RenderInfo({staff}){return(
         
             <div className="my-3">
                 <div className="title"><strong>Phòng ban:</strong></div>
-                <input type="text" disabled value={staff.department.name ? staff.department.name : staff.department}></input>
+                <input type="text" disabled value={staff.departmentId ? staff.departmentId : staff.department}></input>
             </div>
         
         
@@ -47,7 +48,25 @@ function RenderInfo({staff}){return(
 
 
 function StaffInfo(props){
-    if (props.staff!=null){return(
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.staff!=null){return(
         <div className="container-fluid">
             <div className='row'>
                 <Breadcrumb>

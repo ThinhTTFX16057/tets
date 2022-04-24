@@ -3,7 +3,7 @@ import {Card, CardBody,CardText, CardTitle, Breadcrumb, BreadcrumbItem} from 're
 import {Link} from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 
-function RenderDepartment({departments,isLoading,errMess}){
+function RenderDepartment({staffs,departments,isLoading,errMess}){
     if (isLoading){
         return(
           <Loading/>
@@ -18,10 +18,12 @@ function RenderDepartment({departments,isLoading,errMess}){
     departments.map((x)=>{
         return(
             <Card kex={x.id} className='col-md-4 col-sm-6 col-12 my-2'>
+                <Link to={`/departments/${x.id}`}>
                 <CardBody>
                     <CardTitle>{x.name}</CardTitle>
-                    <CardText>Số lượng nhân viên: {x.numberOfStaff}</CardText>
+                    <CardText>Số lượng nhân viên: {staffs.filter((staff)=>staff.departmentId==x.id).length}</CardText>
                 </CardBody>
+                </Link>
             </Card>
         );
     })
@@ -63,6 +65,7 @@ function Department(props){
         <div class="container-fluid">
             <div className="row">
                 <RenderDepartment 
+                staffs={props.staffs}
                 departments={props.departments} 
                 isLoading={props.deptsLoading} 
                 errMess={props.deptsErrMess}/>

@@ -22,7 +22,8 @@ const RenderStaff=({staff,isLoading, errMess,departments})=>{
           <h4>{errMess}</h4>
         );
       }
-    else return(
+    else {
+        return(
         <div className="col-md-2 col-sm-4 col-6 my-2">
             <Card style={{height:"100%"}} key={staff.id} >
                 <Link to={`/staff/${staff.id}`}>
@@ -35,7 +36,8 @@ const RenderStaff=({staff,isLoading, errMess,departments})=>{
                 </Link>
             </Card>
         </div>
-    );
+        );
+    }
 }
 class StaffList extends Component{
     constructor(props){
@@ -120,7 +122,7 @@ class StaffList extends Component{
                 <div className="container">
                     <div className="row"> 
                         <div className="col-12">
-                            <h4>{this.props.dishes.errMess}</h4>
+                            <h4>{this.props.staffs.errMess}</h4>
                         </div>
                     </div>
                 </div>

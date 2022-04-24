@@ -15,7 +15,8 @@ function RenderSalary({staffsSalary,isLoading,errMess}){
           <h4>{errMess}</h4>
         );
       }
-    else return(
+    else if(staffsSalary.name!=null && staffsSalary.id !=null && staffsSalary.salaryScale!=null && staffsSalary.overTime!=null && staffsSalary.salary !=null) {
+        return(
         <div key={staffsSalary.id} className='col-md-4 col-sm-6 col-12'>
             <Card style={{border:"1px solid black"}}>
                 <CardTitle>{staffsSalary.name}</CardTitle>
@@ -25,7 +26,9 @@ function RenderSalary({staffsSalary,isLoading,errMess}){
                 <CardText><input type="text" disabled value={`Lương: ${staffsSalary.salary.toLocaleString()} VNĐ`}></input></CardText>
             </Card>
         </div>
-    );
+        );
+    }
+    else return(<div className="d-none"></div>)
 } 
 
 function Salary(props){

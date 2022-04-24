@@ -7,6 +7,7 @@ import Department from './DepartmentComponent';
 
 import StaffList from './StaffListComponent';
 import StaffInfo from './StaffInfoComponent';
+import DepartmentInfo from './DepartmentInfoComponent';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 
@@ -27,7 +28,6 @@ const mapDispatchToProps = (dispatch) => ({
     fetchStaffs: () => { dispatch(fetchStaffs() )},
     fetchDepts: () => { dispatch(fetchDepts() )},
     fetchSS: () => { dispatch(fetchSS() )},
-  
 });
 class Main extends Component{
     constructor(props){
@@ -39,13 +39,21 @@ class Main extends Component{
         this.props.fetchSS();
       }
     render(){
-        const StaffWithId=({match})=>{
-            return(
+        const StaffWithId=({match})=>{return(
             <StaffInfo
-            staff={this.props.staffs.staffs.filter((staff)=>staff.id===parseInt(match.params.staffId,10))[0]}
-            isLoading={this.props.staffs.isLoading}
-            errMess={this.props.staffs.errMess}
-            departments={this.props.departments.departments}
+                staff={this.props.staffs.staffs.filter((staff)=>staff.id===parseInt(match.params.staffId,10))[0]}
+                isLoading={this.props.staffs.isLoading}
+                errMess={this.props.staffs.errMess}
+                departments={this.props.departments.departments}
+            />
+            );
+        }
+        const DepartmentWithId=({match})=>{return(
+            <DepartmentInfo
+                staffs={this.props.staffs.staffs.filter((staff)=>staff.departmentId===match.params.deptsId)}
+                isLoading={this.props.staffs.isLoading}
+                errMess={this.props.staffs.errMess}
+                departments={this.props.departments.departments}
             />
             );
         }
@@ -55,12 +63,12 @@ class Main extends Component{
             <Header/>
             <Switch>
             <Route path='/home' component={
-                  ()=><Home
+                ()=><Home
                     staffs={this.props.staffs.staffs} 
                     isLoading={this.props.staffs.isLoading}
                     errMess={this.props.staffs.errMess}
-                  />
-              }/>
+                />
+            }/>
             <Route exact path="/staff" component={()=>
                 <StaffList 
                     staffs={this.props.staffs} 
@@ -72,17 +80,21 @@ class Main extends Component{
             />
             <Route path="/staff/:staffId" component={StaffWithId}/>
             <Route exact path="/department" component={
-                  ()=><Department departments={this.props.departments.departments}
-                  deptsLoading={this.props.departments.isLoading}
-                  deptsErrMess={this.props.departments.errMess}
-                    />
-                }/>
+                ()=><Department 
+                    staffs={this.props.staffs.staffs} 
+                    departments={this.props.departments.departments}
+                    deptsLoading={this.props.departments.isLoading}
+                    deptsErrMess={this.props.departments.errMess}
+                />
+            }/>
+            <Route path="/departments/:deptsId" component={DepartmentWithId}/>
             <Route exact path="/salary" component={
-                    ()=><Salary staffsSalary={this.props.staffsSalary.staffsSalary}
+                ()=><Salary 
+                    staffsSalary={this.props.staffsSalary.staffsSalary}
                     ssLoading={this.props.staffsSalary.isLoading}
                     ssErrMess={this.props.staffsSalary.errMess}
-                    />
-                  }/>
+                />
+            }/>
             <Redirect to="/home"/>
             </Switch>
             <Footer/>

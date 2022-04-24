@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 import dateFormat from 'dateformat';
 import { Loading } from './LoadingComponent';
 
-function RenderInfo({staff}){return(
+function RenderInfo({staff,departments}){return(
     <div key={staff.id} className="row">
         <CardBody  className="col-md-3 col-sm-4 col-12">
             <CardImg src={staff.image} />
@@ -27,7 +27,7 @@ function RenderInfo({staff}){return(
         
             <div className="my-3">
                 <div className="title"><strong>Phòng ban:</strong></div>
-                <input type="text" disabled value={staff.departmentId ? staff.departmentId : staff.department}></input>
+                <input type="text" disabled value={departments.filter((department)=>staff.departmentId==department.id).map((x)=>x.name)}></input>
             </div>
         
         
@@ -81,7 +81,9 @@ function StaffInfo(props){
             </div>
             <div class="container-fluid">
                 <div className="row">
-                    <RenderInfo staff={props.staff}/>
+                    <RenderInfo 
+                    staff={props.staff} 
+                    departments={props.departments}/>
                 </div>
             </div>
         </div>

@@ -4,10 +4,7 @@ export const Staffs = (state = {isLoading: true,errMess: null,staffs:[] }, actio
     switch (action.type) {
         //khi có yêu cầu hành động ADD_STAFF từ ActionCreators thì tiến hành tạo state mới bằng concat
         case ActionTypes.ADD_STAFF:
-            var newStaff = action.payload;
-            newStaff.id = state.length;
-            console.log("newStaff: ", newStaff);
-            return { ...state, staffs: state.staffs.concat(newStaff)}
+            return { ...state, staffs: state.staffs.concat(action.payload)}
         //fetch staff
         case ActionTypes.STAFFS_DISPLAY:
             return {...state, isLoading: false, errMess: null, staffs: action.payload};

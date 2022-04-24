@@ -22,7 +22,7 @@ function RenderSalary({staffsSalary,isLoading,errMess}){
                 <CardText>Mã nhân viên: {staffsSalary.id}</CardText>
                 <CardText>Hệ số lương: {staffsSalary.salaryScale}</CardText>
                 <CardText>Số giờ làm thêm: {staffsSalary.overTime}</CardText>
-                <CardText><input type="text" disabled value={`Lương: ${staffsSalary.salary} VNĐ`}></input></CardText>
+                <CardText><input type="text" disabled value={`Lương: ${staffsSalary.salary.toLocaleString()} VNĐ`}></input></CardText>
             </Card>
         </div>
     );

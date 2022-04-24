@@ -10,7 +10,8 @@ const minLength = (len) => (val) => val && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 const minNum = (num) => (val) => !val || (val >= num);
 
-const RenderStaff=({staff,isLoading, errMess})=>{
+const RenderStaff=({staff,isLoading, errMess,departments})=>{
+
     if (isLoading){
         return(
           <Loading/>
@@ -29,7 +30,7 @@ const RenderStaff=({staff,isLoading, errMess})=>{
                 <CardBody className="">
                     <CardTitle>{staff.name}</CardTitle>
                     <CardText><p>Mã ID: {staff.id}</p></CardText>
-                    <CardText><p>Phòng ban: {staff.departmentId ? staff.departmentId : staff.department}</p></CardText>
+                    <CardText><p>Phòng ban: {departments.filter((department)=>staff.departmentId==department.id).map((x)=>x.name)}</p></CardText>
                 </CardBody>
                 </Link>
             </Card>
@@ -64,7 +65,7 @@ class StaffList extends Component{
     toggleAddModal() {this.setState({isAddModalOpen: !this.state.isAddModalOpen})}
     //Them nhan vien vao StaffList
     handleSubmit (value) {
-        this.props.addStaff(value.name, value.doB, value.salaryScale, value.startDate, value.department,value.annualLeave, value.overTime);
+        this.props.postStaff(value.name, value.doB, value.salaryScale, value.startDate, value.departmentId,value.annualLeave, value.overTime);
     };
     //SORT FUNCTION//
     toggleSortModal() {this.setState({
@@ -102,7 +103,8 @@ class StaffList extends Component{
                 return(<RenderStaff 
                     staff={x} 
                     isLoading={this.props.staffsLoading} 
-                    errMess={this.props.staffsErrMess}/>)
+                    errMess={this.props.staffsErrMess} 
+                    departments={this.props.departments}/>)
             });
         if (this.props.staffs.isLoading) {
             return(
@@ -236,16 +238,16 @@ class StaffList extends Component{
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="department" md={2}>Phòng ban</Label>
+                                <Label htmlFor="departmentId" md={2}>Phòng ban</Label>
                                 <Col md={10}>
-                                    <Control.select model=".department" id="department" name="department" className="form-control"
+                                    <Control.select model=".departmentId" id="departmentId" name="departmentId" className="form-control"
                                         defaultValue="Sale" 
                                     >
-                                        <option selected>Sale</option>
-                                        <option>HR</option>
-                                        <option>Marketing</option>
-                                        <option>IT</option>
-                                        <option>Finance</option>
+                                        <option selected value="Dept01">Sale</option>
+                                        <option value="Dept02">HR</option>
+                                        <option value="Dept03">Marketing</option>
+                                        <option value="Dept04">IT</option>
+                                        <option value="Dept05">Finance</option>
                                     </Control.select>
                                 </Col>
                             </Row>

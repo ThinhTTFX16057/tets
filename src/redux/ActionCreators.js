@@ -3,26 +3,61 @@ import { STAFFS } from '../shared/staffs';
 import { baseUrl } from '../shared/baseUrl';
 
 //add staff
-export const addStaff = (name, doB, salaryScale, startDate, department, annualLeave, overTime) => ({
+export const addStaff = (responseStaff) => ({
     //func addStaff là Redux action trả về hành động ADD_STAFF và data trong payload
     type: ActionTypes.ADD_STAFF,
-    payload: {
-        name: name,
-        doB: doB,
-        salaryScale: salaryScale,
-        startDate: startDate,
-        department: department,
-        annualLeave: annualLeave,
-        overTime: overTime,
-        image: '/assets/images/alberto.png'
-    }
+    payload: responseStaff
 });
+
+export const postStaff = (name, doB, salaryScale, startDate, departmentId, annualLeave, overTime) => (dispatch) => {
+
+    const newStaff = {
+        name:name, doB:doB, salaryScale:salaryScale, startDate:startDate, departmentId:departmentId, annualLeave:annualLeave, overTime:overTime,image: '/assets/images/alberto.png'
+    };
+    
+    return fetch(baseUrl + 'staffs', {
+        method: "POST",
+        body: JSON.stringify(newStaff),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+    .then(response => response.json())
+    .then(responseStaff => dispatch(addStaff(responseStaff)))
+    .catch(error =>  { console.log('post staffs', error.message); alert('Your staff could not be posted\nError: '+error.message); });
+};
 //fetch staffs
 export const fetchStaffs = () => (dispatch) => {
 
     dispatch(staffsLoading(true));
 
     return fetch(baseUrl + 'staffs')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
     .then(response => response.json())
     .then(staffs => dispatch(staffsDisplay(staffs)));
 }
@@ -37,6 +72,19 @@ export const fetchDepts = () => (dispatch) => {
     dispatch(deptsLoading(true));
 
     return fetch(baseUrl + 'departments')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
     .then(response => response.json())
     .then(departments => dispatch(deptsDisplay(departments)));
 }
@@ -51,6 +99,19 @@ export const fetchSS = () => (dispatch) => {
     dispatch(ssLoading(true));
 
     return fetch(baseUrl + 'staffsSalary')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
     .then(response => response.json())
     .then(staffsSalary => dispatch(ssDisplay(staffsSalary)));
 }

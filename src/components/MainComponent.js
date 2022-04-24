@@ -11,7 +11,7 @@ import StaffInfo from './StaffInfoComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 
 import { connect } from 'react-redux';
-import { addStaff, fetchStaffs, fetchDepts, fetchSS } from '../redux/ActionCreators';
+import { postStaff, fetchStaffs, fetchDepts, fetchSS } from '../redux/ActionCreators';
 
 //mapStateToProps để lấy được state từ store truyền thành props cho các components trong Route ở dưới
 const mapStateToProps = state => {
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 }
 //mapDispatchToProps để lấy được func từ store truyền thành props cho các components trong Route ở dưới
 const mapDispatchToProps = (dispatch) => ({
-    addStaff: (name, doB, salaryScale, startDate, department, annualLeave, overTime) => dispatch(addStaff(name, doB, salaryScale, startDate, department, annualLeave, overTime)),
+    postStaff: (name, doB, salaryScale, startDate, departmentId, annualLeave, overTime) => dispatch(postStaff(name, doB, salaryScale, startDate, departmentId, annualLeave, overTime)),
     fetchStaffs: () => { dispatch(fetchStaffs() )},
     fetchDepts: () => { dispatch(fetchDepts() )},
     fetchSS: () => { dispatch(fetchSS() )},
@@ -45,6 +45,7 @@ class Main extends Component{
             staff={this.props.staffs.staffs.filter((staff)=>staff.id===parseInt(match.params.staffId,10))[0]}
             isLoading={this.props.staffs.isLoading}
             errMess={this.props.staffs.errMess}
+            departments={this.props.departments.departments}
             />
             );
         }
@@ -63,9 +64,10 @@ class Main extends Component{
             <Route exact path="/staff" component={()=>
                 <StaffList 
                     staffs={this.props.staffs} 
-                    addStaff={this.props.addStaff}
+                    postStaff={this.props.postStaff}
                     staffsLoading={this.props.staffs.isLoading}
                     staffsErrMess={this.props.staffs.errMess}
+                    departments={this.props.departments.departments}
                 />}
             />
             <Route path="/staff/:staffId" component={StaffWithId}/>

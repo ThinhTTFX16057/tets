@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardImg,CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import {CardImg,CardBody,CardText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link} from "react-router-dom";
 import dateFormat from 'dateformat';
 import { Loading } from './LoadingComponent';
@@ -12,35 +12,32 @@ function RenderInfo({staff,departments}){return(
         <CardBody className="col-md-9 col-sm-8 col-12">       
             
             <h3>Họ và tên: {staff.name}</h3>
-            
             <div className="my-3">
                 <div className="title"><strong>Ngày sinh:</strong></div>
                 <input type="text" disabled value={dateFormat(staff.doB,"dd/mm/yyyy")}></input>
             </div>
-        
-        
             <div className="my-3">
                 <div className="title"><strong>Ngày vào công ty:</strong></div>
                 <input type="text" disabled value={dateFormat(staff.startDate,"dd/mm/yyyy")}></input>
             </div>
-        
-        
             <div className="my-3">
                 <div className="title"><strong>Phòng ban:</strong></div>
                 <input type="text" disabled value={departments.filter((department)=>staff.departmentId==department.id).map((x)=>x.name)}></input>
             </div>
-        
-        
             <div className="my-3">
                 <div className="title"><strong>Số ngày nghỉ còn lại:</strong></div>
                 <input type="text" disabled value={staff.annualLeave}></input>
             </div>
-        
-        
             <div className="my-3">
                 <div className="title"><strong>Số giờ đã làm thêm:</strong></div>
                 <input type="text" disabled value={staff.overTime}></input>
             </div>
+            <CardText>
+                <Link to={`/staffs/update/${staff.id}`}>
+                    <button className="btn btn-info mx-3" ><strong>Update</strong></button>
+                </Link>
+                    <button className="btn btn-danger mx-3"><strong>Delete</strong></button>
+            </CardText>
             
         </CardBody>
     </div>
@@ -71,7 +68,7 @@ function StaffInfo(props){
             <div className='row'>
                 <Breadcrumb>
                     <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
-                    <BreadcrumbItem><Link to='/staff'>Nhân viên</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to='/staffs'>Nhân viên</Link></BreadcrumbItem>
                     <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
                 </Breadcrumb>
                 <div id="menubar" className='container-fluid'>
@@ -83,7 +80,8 @@ function StaffInfo(props){
                 <div className="row">
                     <RenderInfo 
                     staff={props.staff} 
-                    departments={props.departments}/>
+                    departments={props.departments}
+                    />
                 </div>
             </div>
         </div>

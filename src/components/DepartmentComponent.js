@@ -4,29 +4,18 @@ import {Link} from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 
 function RenderDepartment({staffs,departments,isLoading,errMess}){
-    if (isLoading){
-        return(
-          <Loading/>
-        );
-      }
-    else if (errMess){
-        return(
-          <h4>{errMess}</h4>
-        );
-      }
-    else return(
-    departments.map((x)=>{
-        return(
-            <Card kex={x.id} className='col-md-4 col-sm-6 col-12 my-2'>
-                <Link to={`/departments/${x.id}`}>
-                <CardBody>
-                    <CardTitle>{x.name}</CardTitle>
-                    <CardText>Số lượng nhân viên: {staffs.filter((staff)=>staff.departmentId==x.id).length}</CardText>
-                </CardBody>
-                </Link>
-            </Card>
-        );
-    })
+    if (isLoading){return(<Loading/>)}
+    else if (errMess){return(<h4>{errMess}</h4>)}
+    else return(departments.map((x)=>{return(
+        <Card kex={x.id} className='col-md-4 col-sm-6 col-12 my-2'>
+            <Link to={`/departments/${x.id}`}>
+            <CardBody>
+                <CardTitle>{x.name}</CardTitle>
+                <CardText>Số lượng nhân viên: {staffs.filter((staff)=>staff.departmentId==x.id).length}</CardText>
+            </CardBody>
+            </Link>
+        </Card>
+    )})
 );}   
 function Department(props){
     if (props.departments.isLoading) {

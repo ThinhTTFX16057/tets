@@ -4,22 +4,12 @@ import { Link} from "react-router-dom";
 import { Loading } from './LoadingComponent';
 
 function RenderDeptInfo({staff,isLoading, errMess,departments}){
-
-    if (isLoading){
-        return(
-          <Loading/>
-        );
-      }
-    else if (errMess){
-        return(
-          <h4>{errMess}</h4>
-        );
-      }
-    else {
-        return(
+    if (isLoading){return(<Loading/>)}
+    else if (errMess){return(<h4>{errMess}</h4>)}
+    else {return(
         <div className="col-md-2 col-sm-4 col-6 my-2">
             <Card style={{height:"100%"}} key={staff.id} >
-                <Link to={`/staff/${staff.id}`}>
+                <Link to={`/staffs/${staff.id}`}>
                 <CardImg className=" my-3" src={staff.image} alt={staff.name}/>
                 <CardBody className="">
                     <CardTitle>{staff.name}</CardTitle>
@@ -66,7 +56,7 @@ function DepartmentInfo(props){
             <div className='row'>
                 <Breadcrumb>
                     <BreadcrumbItem><Link to='/home'>Trang chủ</Link></BreadcrumbItem>
-                    <BreadcrumbItem><Link to='/department'>Phòng ban</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to='/departments'>Phòng ban</Link></BreadcrumbItem>
                     <BreadcrumbItem active>Nhân viên</BreadcrumbItem>
                 </Breadcrumb>
                 <div id="menubar" className='container-fluid'>

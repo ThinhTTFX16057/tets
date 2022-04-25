@@ -5,16 +5,8 @@ import { Loading } from './LoadingComponent';
 
 
 function RenderSalary({staffsSalary,isLoading,errMess}){
-    if (isLoading){
-        return(
-          <Loading/>
-        );
-      }
-    else if (errMess){
-        return(
-          <h4>{errMess}</h4>
-        );
-      }
+    if (isLoading){return(<Loading/>)}
+    else if (errMess){return(<h4>{errMess}</h4>)}
     else if(staffsSalary.name!=null && staffsSalary.id !=null && staffsSalary.salaryScale!=null && staffsSalary.overTime!=null && staffsSalary.salary !=null) {
         return(
         <div key={staffsSalary.id} className='col-md-4 col-sm-6 col-12'>

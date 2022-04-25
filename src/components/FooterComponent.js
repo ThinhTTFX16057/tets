@@ -8,8 +8,8 @@ function Footer(props){
                         <h4>Điều hướng</h4>
                         <ul className="list-unstyled ">
                             <li><a href="/home">Trang chủ</a></li>
-                            <li><a href="/staff">Nhân viên</a></li>
-                            <li><a href="/department">Phòng ban</a></li>
+                            <li><a href="/staffs">Nhân viên</a></li>
+                            <li><a href="/departments">Phòng ban</a></li>
                             <li><a href="/salary">Bảng lương</a></li>
                         </ul>
                     </div>

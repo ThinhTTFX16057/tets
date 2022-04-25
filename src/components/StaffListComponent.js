@@ -10,34 +10,29 @@ const minLength = (len) => (val) => val && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 const minNum = (num) => (val) => !val || (val >= num);
 
-const RenderStaff=({staff,isLoading, errMess,departments})=>{
-
-    if (isLoading){
-        return(
-          <Loading/>
-        );
-      }
-    else if (errMess){
-        return(
-          <h4>{errMess}</h4>
-        );
-      }
-    else {
-        return(
+const RenderStaff=({staff,deleteStaff,isLoading, errMess,departments})=>{
+    if (isLoading){return(<Loading/>)}
+    else if (errMess){return(<h4>{errMess}</h4>)}
+    else {return(
         <div className="col-md-2 col-sm-4 col-6 my-2">
             <Card style={{height:"100%"}} key={staff.id} >
-                <Link to={`/staff/${staff.id}`}>
+                <Link to={`/staffs/${staff.id}`}>
                 <CardImg className=" my-3" src={staff.image} alt={staff.name}/>
                 <CardBody className="">
                     <CardTitle>{staff.name}</CardTitle>
                     <CardText><p>Mã ID: {staff.id}</p></CardText>
                     <CardText><p>Phòng ban: {departments.filter((department)=>staff.departmentId==department.id).map((x)=>x.name)}</p></CardText>
                 </CardBody>
-                </Link>
+                </Link>    
+                <CardText>
+                    <Link to={`/staffs/update/${staff.id}`}>
+                        <button className="btn btn-info mx-3" ><strong>Update</strong></button>
+                    </Link>
+                    <button className="btn btn-danger mx-3" onClick={()=>deleteStaff(staff.id)}><strong>Delete</strong></button>
+                </CardText>
             </Card>
         </div>
-        );
-    }
+    )}
 }
 class StaffList extends Component{
     constructor(props){
@@ -51,10 +46,8 @@ class StaffList extends Component{
             isSearchModalOpen: false,
             nameSearch: "",
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
 
         this.toggleAddModal= this.toggleAddModal.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         
         this.toggleSortModal= this.toggleSortModal.bind(this);
         this.toggleSort=this.toggleSort.bind(this)
@@ -65,10 +58,7 @@ class StaffList extends Component{
     
     //ADD FUNCTION//
     toggleAddModal() {this.setState({isAddModalOpen: !this.state.isAddModalOpen})}
-    //Them nhan vien vao StaffList
-    handleSubmit (value) {
-        this.props.postStaff(value.name, value.doB, value.salaryScale, value.startDate, value.departmentId,value.annualLeave, value.overTime);
-    };
+
     //SORT FUNCTION//
     toggleSortModal() {this.setState({
         isSortModalOpen: !this.state.isSortModalOpen
@@ -106,7 +96,9 @@ class StaffList extends Component{
                     staff={x} 
                     isLoading={this.props.staffsLoading} 
                     errMess={this.props.staffsErrMess} 
-                    departments={this.props.departments}/>)
+                    departments={this.props.departments}
+                    deleteStaff={this.props.deleteStaff}
+                    />)
             });
         if (this.props.staffs.isLoading) {
             return(
@@ -182,7 +174,7 @@ class StaffList extends Component{
                 <Modal isOpen={this.state.isAddModalOpen} toggle={this.toggleAddModal} >
                     <ModalHeader toggle={this.toggleAddModal}><strong>THÊM NHÂN VIÊN</strong></ModalHeader>
                     <ModalBody>
-                        <LocalForm onSubmit={(value)=>this.handleSubmit(value)}>
+                        <LocalForm onSubmit={(value)=>this.props.postStaff(value.name, value.doB, value.salaryScale, value.startDate, value.departmentId,value.annualLeave, value.overTime)}>
                             <Row className="form-group">
                                 <Label htmlFor="name" md={2}>Họ tên</Label>
                                 <Col md={10}>

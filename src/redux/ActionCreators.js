@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import { STAFFS } from '../shared/staffs';
 import { baseUrl } from '../shared/baseUrl';
 
 //add staff
@@ -8,7 +7,6 @@ export const addStaff = (responseStaff) => ({
     type: ActionTypes.ADD_STAFF,
     payload: responseStaff
 });
-
 export const postStaff = (name, doB, salaryScale, startDate, departmentId, annualLeave, overTime) => (dispatch) => {
 
     const newStaff = {
@@ -38,6 +36,71 @@ export const postStaff = (name, doB, salaryScale, startDate, departmentId, annua
     .then(response => response.json())
     .then(responseStaff => dispatch(addStaff(responseStaff)))
     .catch(error =>  { console.log('post staffs', error.message); alert('Your staff could not be posted\nError: '+error.message); });
+};
+
+//update staff
+export const updatedStaff = (responseStaff) => ({
+  type: ActionTypes.UPDATE_STAFF,
+  payload: responseStaff
+});
+export const updateStaff = (id, name, doB, salaryScale, startDate, departmentId, annualLeave, overTime) => (dispatch) => {
+
+  const newInfoStaff = {
+      id: id, name:name, doB:doB, salaryScale:salaryScale, startDate:startDate, departmentId:departmentId, annualLeave:annualLeave, overTime:overTime
+  };
+  
+  return fetch(baseUrl + 'staffs', {
+      method: "PATCH",
+      body: JSON.stringify(newInfoStaff),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+  })
+  .then(response => {
+    if (response.ok) {
+      return response;
+    } else {
+      var error = new Error('Error ' + response.status + ': ' + response.statusText);
+      error.response = response;
+      throw error;
+    }
+  },
+  error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+  })
+  .then(response => response.json())
+  .then(responseStaff => dispatch(updatedStaff(responseStaff)))
+
+};
+
+//delete staffs
+export const deletedStaff = (responseStaff) => ({
+  type: ActionTypes.DELETE_STAFF,
+  payload: responseStaff
+});
+export const deleteStaff = (id) => (dispatch) => {
+  
+  return fetch(baseUrl + `staffs/${id}`, {
+      method: "DELETE",
+  })
+  .then(fetch(baseUrl + 'staffs'))
+  .then(response => {
+    if (response.ok) {
+      return response;
+    } else {
+      var error = new Error('Error ' + response.status + ': ' + response.statusText);
+      error.response = response;
+      throw error;
+    }
+  },
+  error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+  })
+  .then(response => response.json())
+  .then(responseStaff => dispatch(deletedStaff(responseStaff)))
 };
 //fetch staffs
 export const fetchStaffs = () => (dispatch) => {

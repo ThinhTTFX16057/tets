@@ -53,10 +53,10 @@ class Header extends Component {
                                 <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Trang chủ</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to='/staff'><span className="fa fa-users fa-lg"></span> Nhân viên</NavLink>
+                                <NavLink className="nav-link" to='/staffs'><span className="fa fa-users fa-lg"></span> Nhân viên</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link"  to='/department'><span className="fa fa-address-card-o fa-lg"></span> Phòng ban</NavLink>
+                                <NavLink className="nav-link"  to='/departments'><span className="fa fa-address-card-o fa-lg"></span> Phòng ban</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink className="nav-link" to='/salary'><span className="fa fa-money fa-lg"></span> Bảng lương</NavLink>

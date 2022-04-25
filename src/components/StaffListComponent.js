@@ -240,7 +240,7 @@ class StaffList extends Component{
                                     <Control.select model=".departmentId" id="departmentId" name="departmentId" className="form-control"
                                         defaultValue="Sale" 
                                     >
-                                        <option selected value="Dept01">Sale</option>
+                                        <option value="Dept01">Sale</option>
                                         <option value="Dept02">HR</option>
                                         <option value="Dept03">Marketing</option>
                                         <option value="Dept04">IT</option>

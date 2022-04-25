@@ -35,7 +35,9 @@ export const postStaff = (name, doB, salaryScale, startDate, departmentId, annua
       })
     .then(response => response.json())
     .then(responseStaff => dispatch(addStaff(responseStaff)))
-    .catch(error =>  { console.log('post staffs', error.message); alert('Your staff could not be posted\nError: '+error.message); });
+    .then(()=>dispatch(fetchDepts() ))
+    .then(()=>dispatch(fetchSS() ))
+    .catch(error =>  { console.log('Add staffs', error.message); alert('Không thể thêm nhân viên\nlỗi: '+error.message); });
 };
 
 //update staff
@@ -46,7 +48,7 @@ export const updatedStaff = (responseStaff) => ({
 export const updateStaff = (id, name, doB, salaryScale, startDate, departmentId, annualLeave, overTime) => (dispatch) => {
 
   const newInfoStaff = {
-      id: id, name:name, doB:doB, salaryScale:salaryScale, startDate:startDate, departmentId:departmentId, annualLeave:annualLeave, overTime:overTime
+      id: id, name:name, doB:new Date(doB), salaryScale:salaryScale, startDate:new Date(startDate), departmentId:departmentId, annualLeave:annualLeave, overTime:overTime
   };
   
   return fetch(baseUrl + 'staffs', {
@@ -72,7 +74,9 @@ export const updateStaff = (id, name, doB, salaryScale, startDate, departmentId,
   })
   .then(response => response.json())
   .then(responseStaff => dispatch(updatedStaff(responseStaff)))
-
+  .then(()=>dispatch(fetchDepts() ))
+  .then(()=>dispatch(fetchSS() ))
+  .catch(error =>  { console.log('Update staffs', error.message); alert('Không thể cập nhật nhân viên\nlỗi: '+error.message); });
 };
 
 //delete staffs
@@ -101,6 +105,9 @@ export const deleteStaff = (id) => (dispatch) => {
   })
   .then(response => response.json())
   .then(responseStaff => dispatch(deletedStaff(responseStaff)))
+  .then(()=>dispatch(fetchDepts() ))
+  .then(()=>dispatch(fetchSS() ))
+  .catch(error =>  { console.log('Delete staffs', error.message); alert('Không thể xoá nhân viên\nlỗi: '+error.message); });
 };
 //fetch staffs
 export const fetchStaffs = () => (dispatch) => {

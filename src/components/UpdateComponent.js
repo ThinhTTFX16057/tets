@@ -28,10 +28,10 @@ function UpdateInfo({staff,updateStaff}){
             <div class="container-fluid">
                 <div className="row">
                 <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
-                    <CardBody  className="col-md-3 col-sm-4 col-12">
+                    <CardBody  className="col-12  col-sm-3 ">
                         <CardImg src={staff.image} alt={staff.name}/>
                     </CardBody>
-                    <CardBody className="col-md-9 col-sm-8 col-12">       
+                    <CardBody className="col-12 col-sm-6">       
                         <LocalForm onSubmit={(value)=>updateStaff(staff.id,value.name, value.doB, value.salaryScale, value.startDate, value.departmentId,value.annualLeave, value.overTime)}>
                             <Row className="form-group">
                                 <Label htmlFor="name" md={2}>Họ tên</Label>
@@ -54,7 +54,7 @@ function UpdateInfo({staff,updateStaff}){
                                 <Col md={10}>
                                     <Control.text type="date" model=".doB" id="doB" name="doB" className="form-control"
                                         validators={{required}}
-                                        defaultValue={staff.doB}
+                                        defaultValue={(staff.doB).substring(0, 10)}
                                     />
                                     <Errors model=".doB" className="text-danger" show="touched"
                                         messages={{
@@ -67,12 +67,12 @@ function UpdateInfo({staff,updateStaff}){
                                 <Label htmlFor="salaryScale" md={2}>Hệ số lương</Label>
                                 <Col md={10}>
                                     <Control.text model=".salaryScale" id="salaryScale" name="salaryScale" className="form-control"
-                                        validators={{required,isNumber,minNum:minNum(1)}}
+                                        validators={{isNumber,minNum:minNum(1)}}
                                         defaultValue={staff.salaryScale}
                                     />
                                     <Errors model=".salaryScale" className="text-danger" show="touched"
                                         messages={{
-                                            required: "Vui lòng nhập hệ số lương. ",
+                                           
                                             isNumber: "Phải là số dương! ",
                                             minNum: "Tối thiểu là 1.0! "
                                         }}
@@ -84,7 +84,7 @@ function UpdateInfo({staff,updateStaff}){
                                 <Col md={10}>
                                     <Control.text type="date" model=".startDate" id="startDate" name="startDate" className="form-control"
                                         validators={{required}}
-                                        defaultValue={staff.startDate}
+                                        defaultValue={(staff.startDate).substring(0, 10)}
                                     />
                                     <Errors model=".startDate" className="text-danger" show="touched"
                                         messages={{
@@ -111,12 +111,12 @@ function UpdateInfo({staff,updateStaff}){
                                 <Label htmlFor="annualLeave" md={2}>Số ngày nghỉ còn lại</Label>
                                 <Col md={10}>
                                     <Control.text model=".annualLeave" id="annualLeave" name="annualLeave" className="form-control"
-                                        validators={{required,isNumber,minNum:minNum(0)}}
+                                        validators={{isNumber,minNum:minNum(0)}}
                                         defaultValue={staff.annualLeave}
                                     />
                                     <Errors model=".annualLeave" className="text-danger" show="touched"
                                         messages={{
-                                            required: "Vui lòng nhập số ngày nghỉ còn lại. ",
+                                            
                                             isNumber: "Phải là số dương! ",
                                             minNum: "Tối thiểu là 0! "
                                         }}
@@ -127,12 +127,12 @@ function UpdateInfo({staff,updateStaff}){
                                 <Label htmlFor="overTime" md={2}>Số giờ đã làm thêm</Label>
                                 <Col md={10}>
                                     <Control.text model=".overTime" id="overTime" name="overTime" className="form-control"
-                                        validators={{required,isNumber,minNum:minNum(0)}}
+                                        validators={{isNumber,minNum:minNum(0)}}
                                         defaultValue={staff.overTime}
                                     />
                                     <Errors model=".overTime" className="text-danger" show="touched"
                                         messages={{
-                                            required: "Vui lòng nhập số giờ đã làm thêm. ",
+                                            
                                             isNumber: "Phải là số dương! ",
                                             minNum: "Tối thiểu là 0! "
                                         }}
@@ -141,10 +141,13 @@ function UpdateInfo({staff,updateStaff}){
                             </Row>
                             <Row className="form-group">
                                 <Col md={{ size: 10, offset: 2 }}>
-                                    <Button type="submit" className="btn btn-success btn-lg">Cập nhật</Button>
+                                    <Button type="submit" className="btn btn-success btn-lg">Update</Button>
                                 </Col>
                             </Row>
                         </LocalForm>
+                    </CardBody>
+                    <CardBody  className="col-12 col-sm-3">
+                       <div></div>
                     </CardBody>
                 </FadeTransform>    
                 </div>

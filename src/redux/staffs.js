@@ -4,7 +4,7 @@ export const Staffs = (state = {isLoading: true,errMess: null,staffs:[] }, actio
     switch (action.type) {
         //add staff
         case ActionTypes.ADD_STAFF:
-            return { ...state, staffs: state.staffs.concat(action.payload)}
+            return { ...state, staffs: action.payload}
         //update staff
         case ActionTypes.UPDATE_STAFF:
             return {...state, isLoading: false, errMess: null, staffs: action.payload}

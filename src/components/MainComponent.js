@@ -14,6 +14,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 
 import { connect } from 'react-redux';
 import { postStaff, updateStaff, deleteStaff, fetchStaffs, fetchDepts, fetchSS } from '../redux/ActionCreators';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const mapStateToProps = state => {
     return {
@@ -49,6 +50,7 @@ class Main extends Component{
                 isLoading={this.props.staffs.isLoading}
                 errMess={this.props.staffs.errMess}
                 departments={this.props.departments.departments}
+                deleteStaff={this.props.deleteStaff}
             />
             );
         }
@@ -73,44 +75,48 @@ class Main extends Component{
         return (
         <div>
             <Header/>
-            <Switch>
-            <Route path='/home' component={
-                ()=><Home
-                    staffs={this.props.staffs.staffs} 
-                    isLoading={this.props.staffs.isLoading}
-                    errMess={this.props.staffs.errMess}
+            <TransitionGroup>
+            <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+                <Switch>
+                <Route path='/home' component={
+                    ()=><Home
+                        staffs={this.props.staffs.staffs} 
+                        isLoading={this.props.staffs.isLoading}
+                        errMess={this.props.staffs.errMess}
+                    />
+                }/>
+                <Route exact path="/staffs" component={()=>
+                    <StaffList 
+                        staffs={this.props.staffs} 
+                        postStaff={this.props.postStaff}
+                        deleteStaff={this.props.deleteStaff}
+                        staffsLoading={this.props.staffs.isLoading}
+                        staffsErrMess={this.props.staffs.errMess}
+                        departments={this.props.departments.departments}
+                    />}
                 />
-            }/>
-            <Route exact path="/staffs" component={()=>
-                <StaffList 
-                    staffs={this.props.staffs} 
-                    postStaff={this.props.postStaff}
-                    deleteStaff={this.props.deleteStaff}
-                    staffsLoading={this.props.staffs.isLoading}
-                    staffsErrMess={this.props.staffs.errMess}
-                    departments={this.props.departments.departments}
-                />}
-            />
-            <Route exact path="/staffs/:staffId" component={StaffWithId}/>
-            <Route exact path="/staffs/update/:staffId" component={UpdateStaffWithId}/>
-            <Route exact path="/departments" component={
-                ()=><Department 
-                    staffs={this.props.staffs.staffs} 
-                    departments={this.props.departments.departments}
-                    deptsLoading={this.props.departments.isLoading}
-                    deptsErrMess={this.props.departments.errMess}
-                />
-            }/>
-            <Route exact path="/departments/:deptsId" component={DepartmentWithId}/>
-            <Route exact path="/salary" component={
-                ()=><Salary 
-                    staffsSalary={this.props.staffsSalary.staffsSalary}
-                    ssLoading={this.props.staffsSalary.isLoading}
-                    ssErrMess={this.props.staffsSalary.errMess}
-                />
-            }/>
-            <Redirect to="/home"/>
-            </Switch>
+                <Route exact path="/staffs/:staffId" component={StaffWithId}/>
+                <Route exact path="/staffs/update/:staffId" component={UpdateStaffWithId}/>
+                <Route exact path="/departments" component={
+                    ()=><Department 
+                        staffs={this.props.staffs.staffs} 
+                        departments={this.props.departments.departments}
+                        deptsLoading={this.props.departments.isLoading}
+                        deptsErrMess={this.props.departments.errMess}
+                    />
+                }/>
+                <Route exact path="/departments/:deptsId" component={DepartmentWithId}/>
+                <Route exact path="/salary" component={
+                    ()=><Salary 
+                        staffsSalary={this.props.staffsSalary.staffsSalary}
+                        ssLoading={this.props.staffsSalary.isLoading}
+                        ssErrMess={this.props.staffsSalary.errMess}
+                    />
+                }/>
+                <Redirect to="/home"/>
+                </Switch>
+            </CSSTransition>
+            </TransitionGroup>
             <Footer/>
         </div>
     )}

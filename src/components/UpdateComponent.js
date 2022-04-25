@@ -2,6 +2,7 @@ import React from 'react';
 import {CardImg,CardBody, Breadcrumb, BreadcrumbItem,  Button, Row, Col, Label} from 'reactstrap';
 import { Link} from "react-router-dom";
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { FadeTransform } from 'react-animation-components';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || (val.length <= len);
@@ -26,6 +27,7 @@ function UpdateInfo({staff,updateStaff}){
             </div>
             <div class="container-fluid">
                 <div className="row">
+                <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
                     <CardBody  className="col-md-3 col-sm-4 col-12">
                         <CardImg src={staff.image} alt={staff.name}/>
                     </CardBody>
@@ -144,6 +146,7 @@ function UpdateInfo({staff,updateStaff}){
                             </Row>
                         </LocalForm>
                     </CardBody>
+                </FadeTransform>    
                 </div>
             </div>
         </div>

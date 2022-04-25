@@ -3,6 +3,7 @@ import {Card, CardImg, CardTitle,CardBody,CardText, Breadcrumb, BreadcrumbItem, 
 import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { FadeTransform } from 'react-animation-components';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || (val.length <= len);
@@ -15,22 +16,24 @@ const RenderStaff=({staff,deleteStaff,isLoading, errMess,departments})=>{
     else if (errMess){return(<h4>{errMess}</h4>)}
     else {return(
         <div className="col-md-2 col-sm-4 col-6 my-2">
-            <Card style={{height:"100%"}} key={staff.id} >
-                <Link to={`/staffs/${staff.id}`}>
-                <CardImg className=" my-3" src={staff.image} alt={staff.name}/>
-                <CardBody className="">
-                    <CardTitle>{staff.name}</CardTitle>
-                    <CardText><p>Mã ID: {staff.id}</p></CardText>
-                    <CardText><p>Phòng ban: {departments.filter((department)=>staff.departmentId==department.id).map((x)=>x.name)}</p></CardText>
-                </CardBody>
-                </Link>    
-                <CardText>
-                    <Link to={`/staffs/update/${staff.id}`}>
-                        <button className="btn btn-info mx-3" ><strong>Update</strong></button>
-                    </Link>
-                    <button className="btn btn-danger mx-3" onClick={()=>deleteStaff(staff.id)}><strong>Delete</strong></button>
-                </CardText>
-            </Card>
+            <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
+                <Card style={{height:"100%"}} key={staff.id} >
+                    <Link to={`/staffs/${staff.id}`}>
+                    <CardImg className=" my-3" src={staff.image} alt={staff.name}/>
+                    <CardBody className="">
+                        <CardTitle>{staff.name}</CardTitle>
+                        <CardText><p>Mã ID: {staff.id}</p></CardText>
+                        <CardText><p>Phòng ban: {departments.filter((department)=>staff.departmentId==department.id).map((x)=>x.name)}</p></CardText>
+                    </CardBody>
+                    </Link>    
+                    <CardText>
+                        <Link to={`/staffs/update/${staff.id}`}>
+                            <button className="btn btn-info m-3" ><strong>Update</strong></button>
+                        </Link>
+                        <button className="btn btn-danger m-3" onClick={()=>deleteStaff(staff.id)}><strong>Delete</strong></button>
+                    </CardText>
+                </Card>
+            </FadeTransform>
         </div>
     )}
 }

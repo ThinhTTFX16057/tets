@@ -1,6 +1,7 @@
 import React from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import { Loading } from './LoadingComponent';
+import { FadeTransform } from 'react-animation-components';
 
 function Home(props){
   if (props.isLoading){
@@ -14,6 +15,7 @@ function Home(props){
     );
   }
   else return(
+    <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
       <div className='container-fluid'>
         <div className='row col-md-4 col-sm-4 col-xs-5 floatleft chart'>
           <PieChart
@@ -36,6 +38,7 @@ function Home(props){
           Thống kê nhân viên theo khoa phòng
         </div>
       </div>
+    </FadeTransform>
     );
   } 
 

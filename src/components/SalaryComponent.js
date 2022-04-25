@@ -2,22 +2,24 @@ import React, {useState} from "react";
 import {Card,CardText, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { Loading } from './LoadingComponent';
-
+import { FadeTransform } from 'react-animation-components';
 
 function RenderSalary({staffsSalary,isLoading,errMess}){
     if (isLoading){return(<Loading/>)}
     else if (errMess){return(<h4>{errMess}</h4>)}
     else if(staffsSalary.name!=null && staffsSalary.id !=null && staffsSalary.salaryScale!=null && staffsSalary.overTime!=null && staffsSalary.salary !=null) {
         return(
-        <div key={staffsSalary.id} className='col-md-4 col-sm-6 col-12'>
-            <Card style={{border:"1px solid black"}}>
-                <CardTitle>{staffsSalary.name}</CardTitle>
-                <CardText>Mã nhân viên: {staffsSalary.id}</CardText>
-                <CardText>Hệ số lương: {staffsSalary.salaryScale}</CardText>
-                <CardText>Số giờ làm thêm: {staffsSalary.overTime}</CardText>
-                <CardText><input type="text" disabled value={`Lương: ${staffsSalary.salary.toLocaleString()} VNĐ`}></input></CardText>
-            </Card>
-        </div>
+            <div key={staffsSalary.id} className='col-md-4 col-sm-6 col-12'>
+                <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
+                    <Card style={{border:"1px solid black"}}>
+                        <CardTitle>{staffsSalary.name}</CardTitle>
+                        <CardText>Mã nhân viên: {staffsSalary.id}</CardText>
+                        <CardText>Hệ số lương: {staffsSalary.salaryScale}</CardText>
+                        <CardText>Số giờ làm thêm: {staffsSalary.overTime}</CardText>
+                        <CardText><input type="text" disabled value={`Lương: ${staffsSalary.salary.toLocaleString()} VNĐ`}></input></CardText>
+                    </Card>
+                </FadeTransform>
+            </div>
         );
     }
     else return(<div className="d-none"></div>)
